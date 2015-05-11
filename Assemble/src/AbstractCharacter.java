@@ -1,4 +1,4 @@
 
-public class AbstractCharacter implements Character {
+public class AbstractCharacter implements Character extends MovingImage {
 
 }
