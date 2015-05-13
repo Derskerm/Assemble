@@ -30,7 +30,7 @@ public class Main extends JFrame {
 
 	public static void main(String[] args)
 	{
-		Main w = new Main("AP Animation Demo");
+		Main w = new Main("Assemble!");
 	}
   
 	public void changePanel() {
