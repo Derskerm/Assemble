@@ -19,6 +19,6 @@ public class GameTile {
 	}
 	
 	public void draw(Graphics g) {
-		g.drawImage(i, x, y, 15, arg4, null);
+		g.drawImage(i, x, y, 10, 15, null);
 	}
 }

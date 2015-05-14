@@ -2,7 +2,8 @@ package Level;
 
 public class LevelGenerator {
 
-	private 
+	private ArrayList<GameTile> map;
+	
 	public LevelGenerator(String fileName) {
 		
 	}
