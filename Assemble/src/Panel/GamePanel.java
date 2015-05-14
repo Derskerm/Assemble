@@ -1,10 +1,11 @@
+package Panel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
-
 import javax.swing.*;
-
 import java.util.*;
+import Character.Mario;
 
 
 public class GamePanel extends JPanel implements Runnable

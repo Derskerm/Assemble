@@ -1,5 +1,8 @@
+package Character;
+
 import java.awt.Shape;
 import java.util.ArrayList;
+import Image.MovingImage;
 
 
 public abstract class AbstractCharacter extends MovingImage implements Character {

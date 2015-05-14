@@ -1,3 +1,5 @@
+package Character;
+
 
 public abstract class AbstractEnemy extends AbstractCharacter implements Enemy {
 

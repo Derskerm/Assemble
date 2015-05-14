@@ -1,11 +1,14 @@
+package Map;
+
 import java.awt.Graphics;
 import java.awt.Image;
 
 /**
- * Class represents a square, or "tile", within a level.
+ * Class represents a 5x30 rectangle, or "tile", within a level.
  * 
  * @author Jordyn
- *
+ * Date: 5/13/15
+ * Updates: 5/14/15,
  */
 public class GameTile {
 
