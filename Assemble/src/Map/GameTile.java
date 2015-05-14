@@ -1,6 +1,7 @@
 package Map;
 
 import java.awt.Graphics;
+import Image.MovingImage;
 import java.awt.Image;
 
 /**
@@ -10,18 +11,13 @@ import java.awt.Image;
  * Date: 5/13/15
  * Updates: 5/14/15,
  */
-public class GameTile {
+public class GameTile extends MovingImage {
 
-	private int x, y;
-	private Image i;
-	
-	public GameTile(int xC, int yC, Image image) {
-		x = xC;
-		y = yC;
-		i = image;
+	public GameTile(String image, int xC, int yC, int w, int h) {
+		super(image, xC, yC, w, h);
 	}
 	
-	public void draw(Graphics g) {
-		g.drawImage(i, x, y, 10, 15, null);
+	public GameTile(MovingImage c, int x, int y, int w, int h) {
+		super(c.getImage(), x, y, w, h);
 	}
 }

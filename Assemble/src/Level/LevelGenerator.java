@@ -12,10 +12,11 @@ import Map.GameTile;
 
 public class LevelGenerator {
 
-	private ArrayList<GameTile> map;
+	//A list of GameTiles that is 
+	private GameTile[][] map;
 	
 	public LevelGenerator() {
-		map = new ArrayList<GameTile>();
+		map = new GameTile[20][150];
 	}
 	
 	public void generateLevel(String fileName) {
@@ -36,8 +37,27 @@ public class LevelGenerator {
 	}
 	
 	private void generate(String[] l) {
-		for(String s : l) {
-			s.
+		for(int i  = 1; i < l.length; i++) {
+			String s = l[i];
+			char[] blocks = s.toCharArray();
+			for(int j = 0; j < blocks.length; j++) {
+				char c = blocks[j];
+				if(c == 'f') {
+					map[i][j] = new GameTile("floor.jpg", i, j, 5, 30);
+				}
+				else if(c == 'p') {
+					map[i][j] = new GameTile(new Player(), i, j, 10, 15);
+				}
+				else if(c == 'e') {
+					map[i][j] = new GameTile(new Enemy(), i, j, 10 , 15);
+				}
+				else if(c == 'P') {
+					map[i][j] = new GameTile("platform.jpg", i, j, 5, 30);
+				}
+				else if(c == 'A') {
+					map[i][j] = new GameTile(new SuperShelbz(), i, j, 10, 15);
+				}
+			}
 		}
 	}
 }
