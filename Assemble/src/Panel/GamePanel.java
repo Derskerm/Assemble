@@ -1,11 +1,11 @@
 package Panel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -14,6 +14,8 @@ import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GrassBlock;
 import Level.LevelOne;
+import Level.LevelTwo;
+import Level.*;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -48,7 +50,8 @@ public class GamePanel extends JPanel implements Runnable
 //			  yay = !yay;
 //		  }
 //	  }
-	  LevelOne one = new LevelOne();
+	  //LevelOne one = new LevelOne();
+	  LevelTwo one = new LevelTwo();
 	  MovingImage[][] mi = one.getLevelItems();
 	  for (MovingImage[] i : mi) {
 		  for (MovingImage m : i) {
