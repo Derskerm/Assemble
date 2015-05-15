@@ -2,7 +2,11 @@ package Panel;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import AnimationDemo.Mario;
@@ -78,6 +82,15 @@ public class GamePanel extends JPanel implements Runnable
 
     //g.setColor(new Color(205,102,29));
    
+  //Background image
+  	BufferedImage img = null;
+      try {
+          img = ImageIO.read(new File("lib//assemble_background.png"));
+      } catch (IOException e) {
+      	e.printStackTrace();
+      }
+      g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
+      
     for (Block b : obstacles) {
     	b.draw(g2, this);
     }
