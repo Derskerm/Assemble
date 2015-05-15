@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable
 //			  yay = !yay;
 //		  }
 //	  }
-	  //LevelOne one = new LevelOne();
+	  //level = new LevelOne();
 	  level = new LevelTwo();
 	  MovingImage[][] mi = level.getLevelItems();
 	  for (MovingImage[] i : mi) {
