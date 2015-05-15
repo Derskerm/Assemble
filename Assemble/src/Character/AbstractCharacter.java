@@ -2,11 +2,9 @@ package Character;
 
 import java.awt.Shape;
 import java.util.ArrayList;
+import AnimationDemo.MovingImage;
 
-import OtherObjects.MovingImage;
-
-
-public abstract class AbstractCharacter extends MovingImage implements Character {
+public abstract class AbstractCharacter extends AnimationDemo.MovingImage implements Character {
 
 	private double health;
 	private final double MAX_HEALTH;
