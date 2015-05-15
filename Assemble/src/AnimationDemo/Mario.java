@@ -9,8 +9,8 @@ import java.util.*;
 
 public class Mario extends MovingImage {
 
-	public static final int MARIO_WIDTH = 40;
-	public static final int MARIO_HEIGHT = 60;
+	public static final int MARIO_WIDTH = 25;
+	public static final int MARIO_HEIGHT = 50;
 	
 	private double xvel, yvel;
 	private boolean onSurface = false;

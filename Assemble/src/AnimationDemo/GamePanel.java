@@ -7,14 +7,18 @@ import javax.swing.*;
 
 import Block.Block;
 import Block.GrassBlock;
+import Level.LevelOne;
 
 import java.util.*;
+import java.util.logging.Level;
 
 
 public class GamePanel extends JPanel implements Runnable
 {
   public static final int DRAWING_WIDTH = 800;
   public static final int DRAWING_HEIGHT = 600;
+  
+  private int marioStartX, marioStartY;
   
   private Rectangle screenRect;
 	
@@ -30,15 +34,25 @@ public class GamePanel extends JPanel implements Runnable
 //	  obstacles.add(new Rectangle(200,400,400,50));
 //	  obstacles.add(new Rectangle(0,250,100,50));
 //	  obstacles.add(new Rectangle(700,250,100,50));
-	  boolean yay = true;
-	  for (int r = 400; r < 600; r+=Block.BLOCK_SIDE_LENGTH) {
-		  for (int c = 0; c < 800; c+=Block.BLOCK_SIDE_LENGTH) {
-			  GrassBlock g = new GrassBlock(c,r);
-			  if (c % 3 != 0) {
-				  g.setSolid(false);
+//	  boolean yay = true;
+//	  for (int r = 400; r < 600; r+=Block.BLOCK_SIDE_LENGTH) {
+//		  for (int c = 0; c < 800; c+=Block.BLOCK_SIDE_LENGTH) {
+//			  GrassBlock g = new GrassBlock(c,r);
+//			  obstacles.add(g);
+//			  yay = !yay;
+//		  }
+//	  }
+	  LevelOne one = new LevelOne();
+	  MovingImage[][] mi = one.getLevelItems();
+	  for (MovingImage[] i : mi) {
+		  for (MovingImage m : i) {
+			  if (m instanceof Block) {
+				  obstacles.add((Block)m);
+			  } else if (m instanceof Mario) {
+				  mario = (Mario)m;
+				  marioStartX = (int) mario.getMinX();
+				  marioStartY = (int) mario.getMinY();
 			  }
-			  obstacles.add(g);
-			  yay = !yay;
 		  }
 	  }
 	  spawnNewMario();
@@ -63,8 +77,7 @@ public class GamePanel extends JPanel implements Runnable
     //g.setColor(new Color(205,102,29));
    
     for (Block b : obstacles) {
-    	if (b.isSolid())
-    		b.draw(g2, this);
+    	b.draw(g2, this);
     }
     
     mario.draw(g2,this);
@@ -76,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  mario = new Mario(DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
+	  mario = new Mario(marioStartX,marioStartY);
   }
 
 
