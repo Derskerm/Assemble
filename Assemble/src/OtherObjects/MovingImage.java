@@ -1,4 +1,4 @@
-package Image;
+package OtherObjects;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

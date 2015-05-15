@@ -1,10 +1,13 @@
 package Character;
 
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.image.*;
 import java.util.*;
-import Image.MovingImage;
+
+import OtherObjects.MovingImage;
 
 public class Mario extends MovingImage {
 

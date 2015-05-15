@@ -6,14 +6,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.util.*;
-
 import Character.Mario;
-import Level.LevelGenerator;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -25,7 +21,6 @@ public class GamePanel extends JPanel implements Runnable
 	
   private Mario mario;
   private ArrayList<Shape> obstacles;
-  private LevelGenerator l;
 
   public GamePanel () {
 	  super();
@@ -37,7 +32,6 @@ public class GamePanel extends JPanel implements Runnable
 	  obstacles.add(new Rectangle(700,250,100,50));
 	  spawnNewMario();
 	  
-	  l = new LevelGenerator();
 	  new Thread(this).start();
   }
 
