@@ -1,6 +1,10 @@
 package AnimationDemo;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import Panel.GamePanel;
+
 import java.awt.*;
 
 public class Main extends JFrame {

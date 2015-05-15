@@ -1,4 +1,4 @@
-package Character.Enemy;
+package Character.enemy;
 
 import Character.AbstractCharacter;
 

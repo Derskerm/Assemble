@@ -3,11 +3,11 @@ package Level;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
+import Character.player.Player;
 import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GoalBlock;
 import Block.GrassBlock;
-import Character.Player.Player;
 
 public class LevelOne extends Level {
 

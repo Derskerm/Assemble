@@ -1,15 +1,18 @@
 package Panel;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
+
+import AnimationDemo.Mario;
+import AnimationDemo.MovingImage;
+import Block.Block;
+import Block.GrassBlock;
+import Level.LevelOne;
+
 import java.util.*;
-import Character.Mario;
+import java.util.logging.Level;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -17,21 +20,44 @@ public class GamePanel extends JPanel implements Runnable
   public static final int DRAWING_WIDTH = 800;
   public static final int DRAWING_HEIGHT = 600;
   
+  private int marioStartX, marioStartY;
+  
   private Rectangle screenRect;
 	
   private Mario mario;
-  private ArrayList<Shape> obstacles;
+  private ArrayList<Block> obstacles;
+
 
   public GamePanel () {
 	  super();
-	  //setBackground(Color.CYAN);
+	  setBackground(Color.CYAN);
 	  screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-	  obstacles = new ArrayList<Shape>();
-	  obstacles.add(new Rectangle(200,400,400,50));
-	  obstacles.add(new Rectangle(0,250,100,50));
-	  obstacles.add(new Rectangle(700,250,100,50));
+	  obstacles = new ArrayList<Block>();
+//	  obstacles.add(new Rectangle(200,400,400,50));
+//	  obstacles.add(new Rectangle(0,250,100,50));
+//	  obstacles.add(new Rectangle(700,250,100,50));
+//	  boolean yay = true;
+//	  for (int r = 400; r < 600; r+=Block.BLOCK_SIDE_LENGTH) {
+//		  for (int c = 0; c < 800; c+=Block.BLOCK_SIDE_LENGTH) {
+//			  GrassBlock g = new GrassBlock(c,r);
+//			  obstacles.add(g);
+//			  yay = !yay;
+//		  }
+//	  }
+	  LevelOne one = new LevelOne();
+	  MovingImage[][] mi = one.getLevelItems();
+	  for (MovingImage[] i : mi) {
+		  for (MovingImage m : i) {
+			  if (m instanceof Block) {
+				  obstacles.add((Block)m);
+			  } else if (m instanceof Mario) {
+				  mario = (Mario)m;
+				  marioStartX = (int) mario.getMinX();
+				  marioStartY = (int) mario.getMinY();
+			  }
+		  }
+	  }
 	  spawnNewMario();
-	  
 	  new Thread(this).start();
   }
 
@@ -39,14 +65,7 @@ public class GamePanel extends JPanel implements Runnable
   {
     super.paintComponent(g);  // Call JPanel's paintComponent method to paint the background
 
-    BufferedImage img = null;
-    try {
-        img = ImageIO.read(new File("assemble_background.png"));
-    } catch (IOException e) {
-    	e.printStackTrace();
-    }
-    
-    Graphics2D g2 = (Graphics2D)g;
+	Graphics2D g2 = (Graphics2D)g;
 
     int width = getWidth();
     int height = getHeight();
@@ -57,13 +76,12 @@ public class GamePanel extends JPanel implements Runnable
     AffineTransform at = g2.getTransform();
     g2.scale(ratioX, ratioY);
 
-    g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, null);
-	
-    g.setColor(new Color(205,102,29));
-    for (Shape s : obstacles) {
-    	g2.fill(s);
+    //g.setColor(new Color(205,102,29));
+   
+    for (Block b : obstacles) {
+    	b.draw(g2, this);
     }
-    //l.generateLevel("LevelOne.txt");
+    
     mario.draw(g2,this);
     
     g2.setTransform(at);
@@ -73,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  mario = new Mario(DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
+	  mario = new Mario(marioStartX,marioStartY);
   }
 
 
