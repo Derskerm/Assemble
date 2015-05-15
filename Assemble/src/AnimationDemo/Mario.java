@@ -17,7 +17,7 @@ public class Mario extends MovingImage {
 	private boolean doubleJumped = false;
 	
 	public Mario(int x, int y) {
-		super("character.png", x, y, MARIO_WIDTH, MARIO_HEIGHT);
+		super("lib//character.png", x, y, MARIO_WIDTH, MARIO_HEIGHT);
 		xvel = 0;
 		yvel = 0;
 	}

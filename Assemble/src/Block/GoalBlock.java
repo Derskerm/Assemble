@@ -10,7 +10,7 @@ public class GoalBlock extends Block {
 	private boolean hasWon = false;
 	
 	public GoalBlock(int x, int y) {
-		super(false,"flag_green.png",x,y);
+		super(false,"lib//flag_green.png",x,y);
 	}
 	
 	public boolean hasWon() {
