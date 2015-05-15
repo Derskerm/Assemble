@@ -2,7 +2,9 @@ package Character;
 
 import java.awt.Shape;
 import java.util.ArrayList;
+
 import AnimationDemo.MovingImage;
+import Character.enemy.Enemy;
 
 public abstract class AbstractCharacter extends AnimationDemo.MovingImage implements Character {
 

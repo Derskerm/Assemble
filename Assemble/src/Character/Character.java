@@ -3,6 +3,8 @@ package Character;
 import java.awt.Shape;
 import java.util.ArrayList;
 
+import Character.enemy.Enemy;
+
 public interface Character {
 	/**
 	 * Moves the Character upwards

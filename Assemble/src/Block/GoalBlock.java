@@ -9,7 +9,7 @@ public class GoalBlock extends Block {
 	private boolean hasDisplayed = false;
 	
 	public GoalBlock(int x, int y) {
-		super(false,"flag_green.png",x,y);
+		super(false,"lib//flag_green.png",x,y);
 	}
 	
 	public boolean intersects(Rectangle2D r) {
