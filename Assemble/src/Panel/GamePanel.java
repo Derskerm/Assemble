@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -13,12 +14,10 @@ import AnimationDemo.Mario;
 import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GrassBlock;
-import Level.LevelOne;
-import Level.LevelTwo;
+import Character.player.Player;
 import Level.*;
 
 import java.util.*;
-import java.util.logging.Level;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -26,19 +25,20 @@ public class GamePanel extends JPanel implements Runnable
   public static final int DRAWING_WIDTH = 800;
   public static final int DRAWING_HEIGHT = 600;
   
-  private int marioStartX, marioStartY;
+  private int playerStartX, playerStartY;
   
   private Rectangle screenRect;
 	
-  private Mario mario;
-  private ArrayList<Block> obstacles;
+  private Player player;
+  private ArrayList<Shape> obstacles;
+  private Level level;
 
 
   public GamePanel () {
 	  super();
 	  setBackground(Color.CYAN);
 	  screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-	  obstacles = new ArrayList<Block>();
+	  obstacles = new ArrayList<Shape>();
 //	  obstacles.add(new Rectangle(200,400,400,50));
 //	  obstacles.add(new Rectangle(0,250,100,50));
 //	  obstacles.add(new Rectangle(700,250,100,50));
@@ -51,16 +51,16 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //LevelOne one = new LevelOne();
-	  LevelTwo one = new LevelTwo();
-	  MovingImage[][] mi = one.getLevelItems();
+	  level = new LevelTwo();
+	  MovingImage[][] mi = level.getLevelItems();
 	  for (MovingImage[] i : mi) {
 		  for (MovingImage m : i) {
 			  if (m instanceof Block) {
-				  obstacles.add((Block)m);
-			  } else if (m instanceof Mario) {
-				  mario = (Mario)m;
-				  marioStartX = (int) mario.getMinX();
-				  marioStartY = (int) mario.getMinY();
+				  obstacles.add(m);
+			  } else if (m instanceof Player) {
+				  player = (Player)m;
+				  playerStartX = (int) player.getMinX();
+				  playerStartY = (int) player.getMinY();
 			  }
 		  }
 	  }
@@ -94,11 +94,12 @@ public class GamePanel extends JPanel implements Runnable
       }
       g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
       
-    for (Block b : obstacles) {
-    	b.draw(g2, this);
+    for (Shape b : obstacles) {
+    	if (b instanceof Block)
+    		((Block)b).draw(g2, this);
     }
     
-    mario.draw(g2,this);
+    player.draw(g2,this);
     
     g2.setTransform(at);
 
@@ -107,16 +108,21 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  mario = new Mario(marioStartX,marioStartY);
+	  player = new Player(playerStartX,playerStartY);
   }
 
 
   public void run() {
 	while (true) { // Modify this to allow quitting
-	  	mario.act(obstacles);
+	  	player.act(obstacles);
 	  	
-	  	if (!screenRect.intersects(mario))
+	  	if (!screenRect.intersects(player))
 	  		spawnNewMario();
+	  	
+	  	if (level.hasWon()) {
+	  		JOptionPane.showMessageDialog(null, "Victory!");
+	  		spawnNewMario();
+	  	}
 	  	
 	  	repaint();
 	  	
@@ -134,13 +140,13 @@ public class KeyHandler implements KeyListener {
   public void keyPressed(KeyEvent e) {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
   		leftKey = true;
-  		mario.walk(-1);
+  		player.walk(-1);
   	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		rightKey = true;
-		mario.walk(1);
+		player.walk(1);
   	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 		upKey = true;
-		mario.jump();
+		player.jump();
   	}
   }
 
@@ -148,15 +154,15 @@ public class KeyHandler implements KeyListener {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
   		leftKey = false;
   		if(rightKey)
-  			mario.walk(1);
+  			player.walk(1);
   		else
-  			mario.walk(0);
+  			player.walk(0);
   	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		rightKey = false;
 		if (leftKey)
-			mario.walk(-1);
+			player.walk(-1);
 		else
-			mario.walk(0);
+			player.walk(0);
   	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 		upKey = false;
   	}
