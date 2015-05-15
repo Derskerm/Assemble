@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import AnimationDemo.Mario;
 import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GrassBlock;

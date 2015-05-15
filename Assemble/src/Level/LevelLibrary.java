@@ -21,6 +21,8 @@ public class LevelLibrary {
 			return new LevelOne();
 		} else if (num == 2) {
 			return new LevelTwo();
+		} else {
+			return null;
 		}
 	}
 	
