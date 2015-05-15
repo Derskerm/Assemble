@@ -3,9 +3,17 @@ package Panel;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.util.*;
+
 import Character.Mario;
+import Level.LevelGenerator;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -17,17 +25,19 @@ public class GamePanel extends JPanel implements Runnable
 	
   private Mario mario;
   private ArrayList<Shape> obstacles;
-
+  private LevelGenerator l;
 
   public GamePanel () {
 	  super();
-	  setBackground(Color.CYAN);
+	  //setBackground(Color.CYAN);
 	  screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 	  obstacles = new ArrayList<Shape>();
 	  obstacles.add(new Rectangle(200,400,400,50));
 	  obstacles.add(new Rectangle(0,250,100,50));
 	  obstacles.add(new Rectangle(700,250,100,50));
 	  spawnNewMario();
+	  
+	  l = new LevelGenerator();
 	  new Thread(this).start();
   }
 
@@ -35,7 +45,14 @@ public class GamePanel extends JPanel implements Runnable
   {
     super.paintComponent(g);  // Call JPanel's paintComponent method to paint the background
 
-	Graphics2D g2 = (Graphics2D)g;
+    BufferedImage img = null;
+    try {
+        img = ImageIO.read(new File("assemble_background.png"));
+    } catch (IOException e) {
+    	e.printStackTrace();
+    }
+    
+    Graphics2D g2 = (Graphics2D)g;
 
     int width = getWidth();
     int height = getHeight();
@@ -46,10 +63,13 @@ public class GamePanel extends JPanel implements Runnable
     AffineTransform at = g2.getTransform();
     g2.scale(ratioX, ratioY);
 
+    g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, null);
+	
     g.setColor(new Color(205,102,29));
     for (Shape s : obstacles) {
     	g2.fill(s);
     }
+    //l.generateLevel("LevelOne.txt");
     mario.draw(g2,this);
     
     g2.setTransform(at);

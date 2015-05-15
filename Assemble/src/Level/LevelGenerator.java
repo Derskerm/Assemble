@@ -25,7 +25,7 @@ public class LevelGenerator {
 		FileReader r;
 		try {
 			r = new FileReader(fileName);
-			BufferedReader breader = new BufferedReader(r);
+			//BufferedReader breader = new BufferedReader(r);
 			String lineSeparator = System.getProperty("line.separator");
 			lines = new String[21];
 			lines = fileName.split(lineSeparator);
@@ -46,18 +46,18 @@ public class LevelGenerator {
 					map[i][j] = new GameTile("floor.jpg", i, j, 5, 30);
 				}
 				else if(c == 'p') {
-					map[i][j] = new GameTile(new Player(), i, j, 10, 15);
+					//map[i][j] = new GameTile(new Player(), i, j, 10, 15);
 				}
 				else if(c == 'e') {
-					map[i][j] = new GameTile(new Enemy(), i, j, 10 , 15);
+					//map[i][j] = new GameTile(new Enemy(), i, j, 10 , 15);
 				}
 				else if(c == 'P') {
 					map[i][j] = new GameTile("platform.jpg", i, j, 5, 30);
 				}
 				else if(c == 'A') {
-					map[i][j] = new GameTile(new SuperShelbz(), i, j, 10, 15);
+					//map[i][j] = new GameTile(new SuperShelbz(), i, j, 10, 15);
 				}
-			}
+			} 
 		}
 	}
 }
