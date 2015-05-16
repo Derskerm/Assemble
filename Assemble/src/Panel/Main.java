@@ -17,7 +17,10 @@ public class Main extends JFrame {
 	    CardLayout cl = new CardLayout();
 	    cardPanel.setLayout(cl);
 	    
-		OptionPanel panel1 = new OptionPanel(this);    
+	    Window w = new Window();
+	    TitleButtons buttons = new TitleButtons(w);
+	    TitlePanel panel1 = new TitlePanel(w);
+		//OptionPanel panel1 = new OptionPanel(this);    
 	    GamePanel panel2 = new GamePanel();
 	    
 	    addKeyListener(panel2.new KeyHandler());

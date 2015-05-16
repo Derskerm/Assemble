@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Panel.GamePanel.KeyHandler;
+
 
 public class Window extends JFrame{
 	/**
@@ -21,6 +23,7 @@ public class Window extends JFrame{
 		title = new TitlePanel(this);
 		info = new InfoPanel(this);
 		game = new GamePanel();
+	    addKeyListener(game.new KeyHandler());
 		setResizable(false);
 		//game = new GamePanel(this);
 		
@@ -45,7 +48,7 @@ public class Window extends JFrame{
 	
 	/**
 	 * Switches panels to the next in the list of panels
-	 * might change it so it changes t5o the panel specified in the parameters
+	 * might change it so it changes to the panel specified in the parameters
 	 */
 	public void changePanel(int panelNum){
 		

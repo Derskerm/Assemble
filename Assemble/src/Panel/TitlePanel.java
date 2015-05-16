@@ -39,11 +39,5 @@ public class TitlePanel extends JPanel{
 	    super.paintComponent(g);
 	        g.drawImage(new ImageIcon("TitleScreenSketch.jpg").getImage(), 0, 0, null);
 	}
-
-
-
-
-	
-	
 	
 }
