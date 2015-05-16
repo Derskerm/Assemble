@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -16,7 +17,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 	
 	/**
 	 * 
-	 * @param w Window JFrame for chnaging panels
+	 * @param w Window JFrame for changing panels
 	 */
 	public TitleButtons(Window w){
 		BoxLayout b = new BoxLayout(this, BoxLayout.PAGE_AXIS);
@@ -36,7 +37,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 
 	@Override
 	/**
-	 * Changes panles when buttons are presses
+	 * Changes panels when buttons are presses
 	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

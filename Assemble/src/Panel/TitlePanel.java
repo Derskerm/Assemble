@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -37,7 +38,7 @@ public class TitlePanel extends JPanel{
 	protected void paintComponent(Graphics g) {
 
 	    super.paintComponent(g);
-	        g.drawImage(new ImageIcon("TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	        g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
 	}
 	
 }

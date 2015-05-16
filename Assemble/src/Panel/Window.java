@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import Panel.GamePanel.KeyHandler;
 
 
-public class Window extends JFrame{
+public class Window extends JFrame {
 	/**
 	 * Contains all the panels and switches between them when needed
 	 */
@@ -19,7 +19,7 @@ public class Window extends JFrame{
 	//private GamePanel game;
 	
 	public Window(){
-		super("the game");
+		super("Assemble!");
 		title = new TitlePanel(this);
 		info = new InfoPanel(this);
 		game = new GamePanel();
@@ -27,7 +27,7 @@ public class Window extends JFrame{
 		setResizable(false);
 		//game = new GamePanel(this);
 		
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 800, 600);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    cardPanel = new JPanel();
