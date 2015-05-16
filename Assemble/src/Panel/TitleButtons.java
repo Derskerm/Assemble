@@ -23,7 +23,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 		BoxLayout b = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		setLayout(b);
 		setOpaque(false);
-		start = new JButton(new ImageIcon("StartButton.jpg"));
+		start = new JButton(new ImageIcon("lib//StartButton.jpg"));
 		info = new JButton("info");
 		start.setAlignmentX(Component.CENTER_ALIGNMENT);
 		info.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -39,6 +39,15 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Adds an amount to increase the power of attack for a Character.
+	 * 
+	 * @param p Amount to increase power by.
+	 */
+	public void addPower(double p) {
+		power += 2;
+	}
+
 	@Override
 	public void jump() {
 		if (onASurface)

@@ -49,8 +49,8 @@ public class GamePanel extends JPanel implements Runnable
 //			  yay = !yay;
 //		  }
 //	  }
-	  level = new LevelOne();
-	  //level = new LevelTwo();
+	  //level = new LevelOne();
+	  level = new LevelTwo();
 	  MovingImage[][] mi = level.getLevelItems();
 	  for (MovingImage[] i : mi) {
 		  for (MovingImage m : i) {
@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable
   
 
 public class KeyHandler implements KeyListener {
-  private boolean rightKey, leftKey, upKey;
+  private boolean rightKey, leftKey, upKey, space, shift;
 	
   public void keyPressed(KeyEvent e) {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -146,7 +146,14 @@ public class KeyHandler implements KeyListener {
   	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 		upKey = true;
 		player.jump();
+  	} else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+  		shift = true;
+  		player.special();
   	}
+  	/*else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+  		space = true;
+  		player.attack(other);
+  	}*/
   }
 
   public void keyReleased(KeyEvent e) {
@@ -164,6 +171,10 @@ public class KeyHandler implements KeyListener {
 			player.walk(0);
   	} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 		upKey = false;
+  	} else if (e.getKeyCode() == KeyEvent.VK_SHIFT) { 
+  		shift = false;
+  	} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+  		space = false;
   	}
   }
 
