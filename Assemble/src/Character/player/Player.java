@@ -18,7 +18,6 @@ public class Player extends AbstractCharacter {
 	@Override
 	public void special() {
 		addPower(2);
-		System.out.println(getPower());
 	}
 
 }
