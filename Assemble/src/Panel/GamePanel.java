@@ -30,7 +30,8 @@ public class GamePanel extends JPanel implements Runnable
 	
   private Player player;
   private ArrayList<Shape> obstacles;
-  private Level level;
+  private LevelLibrary lib;
+  private Level l;
 
 
   public GamePanel () {
@@ -50,8 +51,15 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //level = new LevelOne();
-	  level = new LevelTwo();
-	  MovingImage[][] mi = level.getLevelItems();
+	  lib = new LevelLibrary(0);
+	  l = lib.getCurrentLevel();
+	  resetLevel();
+	  spawnNewMario();
+	  new Thread(this).start();
+  }
+  
+  public void resetLevel() {
+	  MovingImage[][] mi = l.getLevelItems();
 	  for (MovingImage[] i : mi) {
 		  for (MovingImage m : i) {
 			  if (m instanceof Block) {
@@ -63,8 +71,6 @@ public class GamePanel extends JPanel implements Runnable
 			  }
 		  }
 	  }
-	  spawnNewMario();
-	  new Thread(this).start();
   }
 
   public void paintComponent(Graphics g)
@@ -118,9 +124,17 @@ public class GamePanel extends JPanel implements Runnable
 	  	if (!screenRect.intersects(player))
 	  		spawnNewMario();
 	  	
-	  	if (level.hasWon()) {
-	  		JOptionPane.showMessageDialog(null, "Victory!");
-	  		spawnNewMario();
+	  	if (l.hasWon()) {
+	  		if (lib.getCurrentLevel() != null) {
+		  		JOptionPane.showMessageDialog(null, "Victory!");
+	  		}
+	  		else {
+		  		JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
+		  		lib.reset();
+	  		}
+  			l = lib.getCurrentLevel();
+  			resetLevel();
+  			spawnNewMario();
 	  	}
 	  	
 	  	repaint();
