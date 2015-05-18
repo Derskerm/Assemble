@@ -1,6 +1,7 @@
 package Character.player;
 
 import Character.AbstractCharacter;
+import Character.NPC.Spawn.Cat;
 
 public class SuperShelbz extends AbstractCharacter {
 

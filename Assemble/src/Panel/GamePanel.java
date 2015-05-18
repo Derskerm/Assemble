@@ -13,6 +13,7 @@ import javax.swing.*;
 import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GrassBlock;
+import Character.player.CatLady;
 import Character.player.Player;
 import Character.player.SuperShelbz;
 import Level.*;

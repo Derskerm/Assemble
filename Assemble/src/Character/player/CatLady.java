@@ -1,6 +1,7 @@
 package Character.player;
 
 import Character.AbstractCharacter;
+import Character.NPC.Spawn.Cat;
 
 public class CatLady extends AbstractCharacter {
 
@@ -15,7 +16,7 @@ public class CatLady extends AbstractCharacter {
 	 */
 	public void special() {
 		// TODO Auto-generated method stub
-		
+		new Cat("cat.jpg", (int)x, (int)y, 10, 5);
 	}
 
 }
