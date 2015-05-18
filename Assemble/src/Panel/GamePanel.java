@@ -14,7 +14,9 @@ import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GrassBlock;
 import Character.player.Player;
+import Character.player.SuperShelbz;
 import Level.*;
+import Character.AbstractCharacter;
 
 import java.util.*;
 
@@ -28,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable
   
   private Rectangle screenRect;
 	
-  private Player player;
+  private AbstractCharacter player;
   private ArrayList<Shape> obstacles;
   private LevelLibrary lib;
   private Level l;
@@ -113,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  player = new Player(playerStartX,playerStartY);
+	  player = new SuperShelbz(playerStartX,playerStartY);
   }
 
 

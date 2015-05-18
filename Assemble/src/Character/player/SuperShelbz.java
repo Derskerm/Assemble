@@ -4,14 +4,26 @@ import Character.AbstractCharacter;
 
 public class SuperShelbz extends AbstractCharacter {
 
-	public SuperShelbz(String filename, int x, int y, int w, int h,
-			double maxHealth, double power) {
-		super(filename, x, y, w, h, maxHealth, power);
+	boolean doubleJumped;
+	
+	public SuperShelbz(int x, int y) {
+		super("lib//Shelbzzz.png", x, y, 25, 50, 100, 5);
+		doubleJumped = true;
 	}
 
-	@Override
+	/**
+	 * Hacks into the system to allow for double jumping.
+	 */
 	public void special() {
-		
+		if (!doubleJumped) {
+			yVelocity =- jumpStrength;
+			doubleJumped = true;
+		}
+	}
+	
+	public void jump() {
+		super.jump();
+		doubleJumped = false;
 	}
 
 }
