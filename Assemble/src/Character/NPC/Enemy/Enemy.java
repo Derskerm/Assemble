@@ -1,4 +1,4 @@
-package Character.enemy;
+package Character.NPC.Enemy;
 
 import Character.Character;
 

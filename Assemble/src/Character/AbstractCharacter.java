@@ -10,7 +10,10 @@ import javax.swing.JOptionPane;
 import AnimationDemo.MovingImage;
 import Block.GoalBlock;
 import AnimationDemo.MovingImage;
-import Character.enemy.Enemy;
+import Character.NPC.Enemy.Enemy;
+import Item.Item;
+import Item.Upgrade.Upgrade;
+import Item.Weapon.Weapon;
 
 public abstract class AbstractCharacter extends AnimationDemo.MovingImage implements Character {
 
@@ -18,11 +21,12 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 	private final double MAX_HEALTH;
 	private double power;
 	private double xAcc;
-	private double xVelocity, yVelocity;
+	protected double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double friction;
 	private double gravity;
-	private double jumpStrength;
+	protected double jumpStrength;
+	protected Weapon weapon = null;
 	
 	public AbstractCharacter(String filename, int x, int y, int w, int h, double maxHealth, double power) {
 		super(filename, x, y, w, h);
@@ -45,7 +49,7 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 	 * @param p Amount to increase power by.
 	 */
 	public void addPower(double p) {
-		power += 2;
+		power += p;
 	}
 
 	@Override
@@ -57,13 +61,16 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 
 	@Override
 	public void walk(int amt) {
-		xAcc = amt;
+		xAcc = amt * .60;
 		
 	}
 
 	@Override
 	public void attack(Enemy other) {
-		other.addHealth(power);
+		if (weapon == null)
+			other.addHealth(-power);
+		else
+			other.addHealth(-weapon.getPower());
 	}
 
 	@Override
@@ -82,7 +89,6 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 		return MAX_HEALTH;
 	}
 
-	@Override
 	public void act(ArrayList<Shape> obstacles) {
 		double xCoord = getX();
 		double yCoord = getY();
@@ -175,154 +181,29 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 	}
 	
 	public abstract void special();
+	
+	public void pickUpItem(Item i) {
+		if (i instanceof Weapon) {
+			if (weapon == null) {
+				((Weapon)i).setPlayer(this);;
+				weapon = (Weapon)i;
+			} else {
+				weapon.discard();
+				((Weapon)i).use();
+				weapon = (Weapon)i;
+			}
+		} else if (i instanceof Upgrade) {
+			i.use();
+			addPower(((Upgrade) i).getPowerBonus());
+			addHealth(((Upgrade)i).getHealthBonus());
+		}
+	}
+	
+	public void discardWeapon() {
+		weapon.discard();
+		weapon = null;
+	}
 
 }
 
-/*
- * package AnimationDemo;
 
-
-
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.util.*;
-
-import javax.swing.JOptionPane;
-
-import Block.GoalBlock;
-
-public class Mario3 extends MovingImage {
-
-	public static final int MARIO_WIDTH = 40;
-	public static final int MARIO_HEIGHT = 60;
-
-	private double xAcc;
-	private double xVelocity, yVelocity;
-	private boolean onASurface;
-	private double friction;
-	private double gravity;
-	private double jumpStrength;
-
-	public Mario3(int x, int y) {
-		super("character.png", x, y, MARIO_WIDTH, MARIO_HEIGHT);
-		xVelocity = 0;
-		yVelocity = 0;
-		onASurface = false;
-		gravity = 0.7;
-		friction = .85;
-		jumpStrength = 15;
-		xAcc = 0;
-	}
-
-	// METHODS
-	public void walk(int dir) {
-		xAcc = dir;
-	}
-
-	public void jump() {
-		if (onASurface)
-			yVelocity -= jumpStrength;
-	}
-
-	public void act(ArrayList<MovingImage> obstacles) {
-		
-		double xCoord = getX();
-		double yCoord = getY();
-		double width = getWidth();
-		double height = getHeight();
-		
-		
-
-		// ***********Y AXIS***********
-
-		yVelocity += gravity; // GRAVITY
-		double yCoord2 = yCoord + yVelocity;
-
-		Rectangle2D.Double stretchY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity));
-
-		onASurface = false;
-		
-		if (yVelocity > 0) {
-			Shape standingSurface = null;
-			for (Shape s : obstacles) {
-				if (s.intersects(stretchY)) {
-					onASurface = true;
-					standingSurface = s;
-					yVelocity = 0;
-				}
-			}
-			if (standingSurface != null) {
-				Rectangle r = standingSurface.getBounds();
-				yCoord2 = r.getY()-height;
-			}
-		} else if (yVelocity < 0) {
-			Shape headSurface = null;
-			for (Shape s : obstacles) {
-				if (s.intersects(stretchY)) {
-					headSurface = s;
-					yVelocity = 0;
-				}
-			}
-			if (headSurface != null) {
-				Rectangle r = headSurface.getBounds();
-				yCoord2 = r.getY()+r.getHeight();
-			}
-		}
-
-		if (Math.abs(yVelocity) < .5)
-			yVelocity = 0;
-
-		// ***********X AXIS***********
-
-		if (xVelocity <= 10 && xVelocity >= -10)
-			xVelocity += xAcc;
-		xVelocity *= friction;
-
-		double xCoord2 = xCoord + xVelocity;
-
-		Rectangle2D.Double stretchX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity),height);
-
-		if (xVelocity > 0) {
-			Shape rightSurface = null;
-			for (Shape s : obstacles) {
-				if (s.intersects(stretchX)) {
-					rightSurface = s;
-					xVelocity = 0;
-				}
-			}
-			if (rightSurface != null) {
-				Rectangle r = rightSurface.getBounds();
-				xCoord2 = r.getX()-width;
-			}
-		} else if (xVelocity < 0) {
-			Shape leftSurface = null;
-			for (Shape s : obstacles) {
-				if (s.intersects(stretchX)) {
-					leftSurface = s;
-					xVelocity = 0;
-				}
-			}
-			if (leftSurface != null) {
-				Rectangle r = leftSurface.getBounds();
-				xCoord2 = r.getX()+r.getWidth();
-			}
-		}
-
-
-		if (Math.abs(xVelocity) < .5)
-			xVelocity = 0;
-
-		for (Shape s : obstacles) {
-			if (s instanceof GoalBlock && (s.intersects(stretchY) || s.intersects(stretchX))) {
-				JOptionPane.showMessageDialog(null, "You win!!!");
-				System.out.println("YAY!");
-			}
-		}
-		
-		moveToLocation(xCoord2,yCoord2);
-
-	}
-
-
-}
-*/

@@ -3,9 +3,10 @@ package Character;
 import java.awt.Shape;
 import java.util.ArrayList;
 
-import Character.enemy.Enemy;
+import Character.NPC.Enemy.Enemy;
+import Item.Item;
 
-public interface Character {
+public interface Character extends Shape {
 	/**
 	 * Moves the Character upwards
 	 */
@@ -49,4 +50,18 @@ public interface Character {
 	 * @param obstacles Shapes in the way of the Character
 	 */
 	void act(ArrayList<Shape> obstacles);
+	/**
+	 * i is picked up by this Character.  Hey, baby.
+	 */
+	void pickUpItem(Item i);
+	/**
+	 * Discards the weapon held by this Character
+	 */
+	void discardWeapon();
+	/**
+	 * amt power is added to the Character's attack
+	 * @param amt the amount of power added
+	 */
+	void addPower(double amt);
+	
 }

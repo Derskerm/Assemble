@@ -12,7 +12,8 @@ import Character.player.Player;
 public abstract class Level {
 
 	private MovingImage[][] levelItems;
-	GoalBlock gb;
+	private GoalBlock gb;
+	private boolean completed;
 	
 	public Level(char[][] key) {
 		levelItems = new MovingImage[key.length][key[0].length];
@@ -50,7 +51,24 @@ public abstract class Level {
 	}
 	
 	public boolean hasWon() {
+		if (gb.hasWon()) {
+			completed = true;
+		}
 		return gb.hasWon();
+	}
+	
+	public void setCompleted(boolean complete) {
+		this.completed = complete;
+		if (!complete) {
+			gb.reset();
+		}
+	}
+	
+	public boolean getComplete() {
+		if (gb.hasWon()) {
+			completed = true;
+		}
+		return completed;
 	}
 	
 	
