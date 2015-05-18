@@ -1,4 +1,6 @@
-package Character;
+package Character.player;
+
+import Character.AbstractCharacter;
 
 public class SuperShelbz extends AbstractCharacter {
 
@@ -9,7 +11,6 @@ public class SuperShelbz extends AbstractCharacter {
 
 	@Override
 	public void special() {
-		
 		
 	}
 

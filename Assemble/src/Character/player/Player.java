@@ -1,7 +1,7 @@
 package Character.player;
 
-import Weapon.Sword;
 import Character.AbstractCharacter;
+import Item.Weapon.Sword;
 
 public class Player extends AbstractCharacter {
 

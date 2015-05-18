@@ -3,7 +3,7 @@ package Character;
 import java.awt.Shape;
 import java.util.ArrayList;
 
-import Character.enemy.Enemy;
+import Character.NPC.Enemy.Enemy;
 
 public interface Character {
 	/**

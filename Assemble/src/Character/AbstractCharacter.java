@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
 import AnimationDemo.MovingImage;
 import Block.GoalBlock;
 import AnimationDemo.MovingImage;
-import Character.enemy.Enemy;
+import Character.NPC.Enemy.Enemy;
+import Item.Weapon.Weapon;
 
 public abstract class AbstractCharacter extends AnimationDemo.MovingImage implements Character {
 
@@ -23,6 +24,7 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 	private double friction;
 	private double gravity;
 	private double jumpStrength;
+	private Weapon weapon = null;
 	
 	public AbstractCharacter(String filename, int x, int y, int w, int h, double maxHealth, double power) {
 		super(filename, x, y, w, h);
@@ -63,7 +65,10 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 
 	@Override
 	public void attack(Enemy other) {
-		other.addHealth(power);
+		if (weapon == null)
+			other.addHealth(-power);
+		else
+			other.addHealth(-weapon.getPower());
 	}
 
 	@Override
@@ -82,7 +87,6 @@ public abstract class AbstractCharacter extends AnimationDemo.MovingImage implem
 		return MAX_HEALTH;
 	}
 
-	@Override
 	public void act(ArrayList<Shape> obstacles) {
 		double xCoord = getX();
 		double yCoord = getY();
