@@ -1,14 +1,14 @@
 package Character.player;
 
-import Character.AbstractCharacter;
-import Character.NPC.Spawn.Cat;
+import java.awt.Shape;
+import java.util.ArrayList;
 
-public class SuperShelbz extends AbstractCharacter {
+public class SuperShelbz extends Player {
 
 	boolean doubleJumped;
 	
 	public SuperShelbz(int x, int y) {
-		super("lib//Shelbzzz.png", x, y, 25, 50, 100, 5);
+		super("lib//Super Shelbz.png", x, y, 19, 48, 100, 5, 12);
 		doubleJumped = true;
 	}
 
@@ -22,9 +22,10 @@ public class SuperShelbz extends AbstractCharacter {
 		}
 	}
 	
-	public void jump() {
-		super.jump();
-		doubleJumped = false;
+	public void act(ArrayList<Shape> obstacles) {
+		super.act(obstacles);
+		if (onASurface)
+			doubleJumped = false;
 	}
 
 }

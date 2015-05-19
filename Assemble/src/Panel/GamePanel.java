@@ -17,7 +17,7 @@ import Character.player.CatLady;
 import Character.player.Player;
 import Character.player.SuperShelbz;
 import Level.*;
-import Character.AbstractCharacter;
+import Plane.Plane;
 
 import java.util.*;
 
@@ -30,18 +30,17 @@ public class GamePanel extends JPanel implements Runnable
   private int playerStartX, playerStartY;
   
   private Rectangle screenRect;
-	
-  private AbstractCharacter player;
-  private ArrayList<Shape> obstacles;
+
   private LevelLibrary lib;
-  private Level l;
+  private Plane plane;
+  private Player player;
+  private Level level;
 
 
   public GamePanel () {
 	  super();
 	  setBackground(Color.CYAN);
 	  screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-	  obstacles = new ArrayList<Shape>();
 //	  obstacles.add(new Rectangle(200,400,400,50));
 //	  obstacles.add(new Rectangle(0,250,100,50));
 //	  obstacles.add(new Rectangle(700,250,100,50));
@@ -55,25 +54,17 @@ public class GamePanel extends JPanel implements Runnable
 //	  }
 	  //level = new LevelOne();
 	  lib = new LevelLibrary(0);
-	  l = lib.getCurrentLevel();
-	  resetLevel();
-	  spawnNewMario();
+	  level = lib.getCurrentLevel();
+	  plane = new Plane(level);
+	  player = level.getPlayer();
+	  playerStartX = (int)player.getX();
+	  playerStartY = (int)player.getY();
 	  new Thread(this).start();
   }
   
   public void resetLevel() {
-	  MovingImage[][] mi = l.getLevelItems();
-	  for (MovingImage[] i : mi) {
-		  for (MovingImage m : i) {
-			  if (m instanceof Block) {
-				  obstacles.add(m);
-			  } else if (m instanceof Player) {
-				  player = (Player)m;
-				  playerStartX = (int) player.getMinX();
-				  playerStartY = (int) player.getMinY();
-			  }
-		  }
-	  }
+	  level = lib.getCurrentLevel();
+	  plane = new Plane(level);
   }
 
   public void paintComponent(Graphics g)
@@ -102,12 +93,7 @@ public class GamePanel extends JPanel implements Runnable
       }
       g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
       
-    for (Shape b : obstacles) {
-    	if (b instanceof Block)
-    		((Block)b).draw(g2, this);
-    }
-    
-    player.draw(g2,this);
+    plane.draw(g2, this);
     
     g2.setTransform(at);
 
@@ -116,26 +102,27 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  player = new SuperShelbz(playerStartX,playerStartY);
+	  player.removeFromGrid();
+	  player = level.getPlayer();
+	  player.insertIntoPlane(plane);
   }
 
+  
 
   public void run() {
 	while (true) { // Modify this to allow quitting
-	  	player.act(obstacles);
+	  	player.act(plane.getShapes());
 	  	
 	  	if (!screenRect.intersects(player))
 	  		spawnNewMario();
 	  	
-	  	if (l.hasWon()) {
+	  	if (level.hasWon()) {
 	  		if (lib.getCurrentLevel() != null) {
 		  		JOptionPane.showMessageDialog(null, "Victory!");
-	  		}
-	  		else {
+	  		} else {
 		  		JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
 		  		lib.reset();
 	  		}
-  			l = lib.getCurrentLevel();
   			resetLevel();
   			spawnNewMario();
 	  	}
@@ -148,10 +135,10 @@ public class GamePanel extends JPanel implements Runnable
 	}
   }
   
-  
+  private boolean upKey;
 
 public class KeyHandler implements KeyListener {
-  private boolean rightKey, leftKey, upKey, space, shift;
+  private boolean rightKey, leftKey, space, shift;//, upKey;
 	
   public void keyPressed(KeyEvent e) {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {

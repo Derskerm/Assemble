@@ -5,21 +5,17 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
+import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 
-public abstract class Block extends MovingImage {
-	
+public abstract class Block extends GameImage {
+
 	private boolean solid;
 	public static final int BLOCK_SIDE_LENGTH = 25;
 	
 	public Block(boolean solid, String filename, int x, int y) {
-		super(new ImageIcon(filename).getImage(),x,y,BLOCK_SIDE_LENGTH,BLOCK_SIDE_LENGTH);
-		this.solid = solid;
-	}
-	
-	public Block(boolean solid, Image image, int x, int y) {
-		super(image,x,y,BLOCK_SIDE_LENGTH,BLOCK_SIDE_LENGTH);
-		this.solid = solid;
+		super(filename, x, y, BLOCK_SIDE_LENGTH, BLOCK_SIDE_LENGTH);
+		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean isSolid() {

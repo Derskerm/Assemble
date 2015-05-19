@@ -3,24 +3,27 @@ package Level;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
+import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 import Block.Block;
 import Block.GoalBlock;
 import Block.GrassBlock;
 import Character.player.Player;
+import Character.player.PlayerOne;
 
 public abstract class Level {
 
-	private MovingImage[][] levelItems;
+	private GameImage[][] levelItems;
 	private GoalBlock gb;
+	private Player player;
 	private boolean completed;
 	
 	public Level(char[][] key) {
-		levelItems = new MovingImage[key.length][key[0].length];
-		toMovingImageArray(key);
+		levelItems = new GameImage[key.length][key[0].length];
+		toGameImageArray(key);
 	}
 	
-	private void toMovingImageArray(char[][] key) {
+	private void toGameImageArray(char[][] key) {
 		for (int c = 0; c < key.length; c++) {
 			for (int r = 0; r < key[c].length; r++) {
 				char h = key[c][r];
@@ -32,19 +35,24 @@ public abstract class Level {
 					levelItems[c][r] = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					gb = (GoalBlock)levelItems[c][r];
 				} else if (h == 'P') {
-					levelItems[c][r] = new Player(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					levelItems[c][r] = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					player = (Player)levelItems[c][r];
 				}
 			}
 		}
 	}
 	
-	public MovingImage[][] getLevelItems() {
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public GameImage[][] getLevelItems() {
 		return levelItems;
 	}
 	
 	public void draw(Graphics g, ImageObserver io) {
-		for (MovingImage[] m : levelItems) {
-			for (MovingImage i : m) {
+		for (GameImage[] m : levelItems) {
+			for (GameImage i : m) {
 				i.draw(g, io);
 			}
 		}

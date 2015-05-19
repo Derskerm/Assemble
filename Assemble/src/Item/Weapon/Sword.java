@@ -9,7 +9,7 @@ import Character.player.Player;
  * @author Jordyn
  *
  */
-public class Sword extends AbstractWeapon {
+public class Sword extends Weapon {
 	
 	private static final int SWORD_POWER = 50;
 	
