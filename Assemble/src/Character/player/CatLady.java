@@ -15,9 +15,9 @@ public class CatLady extends Player {
 	public void special() {
 		if (onASurface)
 			if (isRight)
-				(new Cat((int)getMaxX(), (int)getMaxY()-50, true)).insertIntoPlane(getPlane());
+				(new Cat((int)getMaxX() + 5, (int)getMaxY()-25, true)).insertIntoPlane(getPlane());
 			else
-				(new Cat((int)getMinX()-50, (int)getMaxY()-50, false)).insertIntoPlane(getPlane());
+				(new Cat((int)getMinX() - 30, (int)getMaxY()-25, false)).insertIntoPlane(getPlane());
 	}
 
 }

@@ -112,7 +112,7 @@ public class GamePanel extends JPanel implements Runnable
 
   public void run() {
 	while (true) { // Modify this to allow quitting
-	  	player.act(plane.getShapes());
+	  	plane.act();
 	  	
 	  	if (!screenRect.intersects(player))
 	  		//spawnNewMario();
