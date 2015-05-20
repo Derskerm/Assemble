@@ -16,7 +16,8 @@ public abstract class Character extends GameImage {
 	private final double MAX_HEALTH;
 	protected double power;
 	protected double xAcc;
-	protected double xVelocity, yVelocity;
+	protected double xVelocity;
+	protected double yVelocity;
 	protected boolean onASurface;
 	protected double friction;
 	protected double gravity;

@@ -15,6 +15,7 @@ public abstract class Block extends GameImage {
 	
 	public Block(boolean solid, String filename, int x, int y) {
 		super(filename, x, y, BLOCK_SIDE_LENGTH, BLOCK_SIDE_LENGTH);
+		this.solid = solid;
 		// TODO Auto-generated constructor stub
 	}
 	

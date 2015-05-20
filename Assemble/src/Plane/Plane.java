@@ -10,6 +10,7 @@ import java.util.List;
 
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
+import Character.player.Player;
 import Level.Level;
 
 public class Plane {
@@ -38,7 +39,8 @@ public class Plane {
 	public ArrayList<Shape> getShapes() {
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		for (GameImage mi : images) {
-			shapes.add(mi);
+			if (!(mi instanceof Player))
+				shapes.add(mi);
 		}
 		return shapes;
 	}

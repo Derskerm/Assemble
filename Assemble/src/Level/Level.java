@@ -35,8 +35,9 @@ public abstract class Level {
 					levelItems[c][r] = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					gb = (GoalBlock)levelItems[c][r];
 				} else if (h == 'P') {
-					levelItems[c][r] = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
-					player = (Player)levelItems[c][r];
+					Player p = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					player = p;
+					levelItems[c][r] = player;
 				}
 			}
 		}

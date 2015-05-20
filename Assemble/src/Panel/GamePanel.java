@@ -3,6 +3,7 @@ package Panel;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -114,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable
 	  	player.act(plane.getShapes());
 	  	
 	  	if (!screenRect.intersects(player))
-	  		spawnNewMario();
+	  		//spawnNewMario();
 	  	
 	  	if (level.hasWon()) {
 	  		if (lib.getCurrentLevel() != null) {
