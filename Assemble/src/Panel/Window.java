@@ -26,7 +26,7 @@ public class Window extends JFrame {
 		game = new GamePanel();
 		pause = new PausePanel(this);
 	    addKeyListener(game.new KeyHandler());
-		setResizable(false);
+		//setResizable(false);
 		//game = new GamePanel(this);
 		
 		setBounds(100, 100, 800, 600);

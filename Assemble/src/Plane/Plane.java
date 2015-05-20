@@ -106,7 +106,7 @@ public class Plane {
 	public void draw(Graphics g, ImageObserver io) {
 		for (GameImage mi : images) {
 			mi.draw(g, io);
-			System.out.println(mi);
+			//System.out.println(mi);
 		}
 	}
 }
