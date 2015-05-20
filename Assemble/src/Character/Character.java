@@ -46,7 +46,8 @@ public abstract class Character extends GameImage {
 	
 	public void walk(int amt) {
 		xAcc = amt;
-		isRight = amt > 0;
+		if (amt != 0)
+			isRight = amt > 0;
 	}
 	
 	public abstract void attack();

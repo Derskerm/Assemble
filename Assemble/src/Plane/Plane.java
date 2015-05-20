@@ -12,6 +12,7 @@ import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 import Character.player.Player;
 import Level.Level;
+import Character.Character;
 
 public class Plane {
 	
@@ -77,6 +78,15 @@ public class Plane {
 		GameImage[] wRArray = new GameImage[withinShape.size()];
 		wRArray = withinShape.toArray(wRArray);
 		return wRArray;
+	}
+	
+	public void act() {
+		for (GameImage gi : images) {
+			if (gi instanceof Character) {
+				Character charact = (Character)gi;
+				charact.act(getShapes());
+			}
+		}
 	}
 	
 	public void removeMovingImage(MovingImage mi) {
