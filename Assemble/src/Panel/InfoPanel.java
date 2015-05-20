@@ -1,8 +1,10 @@
 package Panel;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -37,7 +39,14 @@ public class InfoPanel extends JPanel implements ActionListener{
 			myWindow.changePanel(1);
 	}
 
+	/**
+	 * Paints like a regular JPanel but with the image background
+	 */
+	protected void paintComponent(Graphics g) {
 
+	    super.paintComponent(g);
+	        g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	}
 	
 	
 
