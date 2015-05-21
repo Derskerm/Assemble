@@ -1,5 +1,6 @@
 package Panel;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class InfoPanel extends JPanel implements ActionListener{
 		myWindow = w;
 		BorderLayout b = new BorderLayout();
 		setLayout(b);
-		button = new JButton("it works");
+		button = new JButton("Back to Title");
 		button.addActionListener(this);
 		add(button, BorderLayout.SOUTH);
 	}
@@ -43,9 +44,27 @@ public class InfoPanel extends JPanel implements ActionListener{
 	 * Paints like a regular JPanel but with the image background
 	 */
 	protected void paintComponent(Graphics g) {
-
 	    super.paintComponent(g);
-	        g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	    Font f = new Font();
+	    g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	    //Up key
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 20, 50, 50, null);
+	    g.drawString("Character jumps", 90, 20);
+	    //Down Key
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Down.png").getImage(), 20, 90, 50, 50, null);
+	    
+	    //Left Key
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Left.png").getImage(), 20, 160, 50, 50, null);
+	    
+	    //Right Key
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 230, 50, 50, null);
+	    
+	    //Shift Key
+	    g.drawImage(new ImageIcon("lib//computer_key_Shift.png").getImage(), 20, 300, 130, 50, null);
+	    
+	    //Enter Key
+	    g.drawImage(new ImageIcon("lib//computer_key_Enter.jpg").getImage(), 20, 370, 100, 50, null);
+	    
 	}
 	
 	
