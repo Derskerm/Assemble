@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class TitleButtons extends JPanel implements ActionListener{
 	
 	private Window myWindow;
-	private JButton start, info;
+	private JButton start, controls;
 	
 	/**
 	 * 
@@ -24,13 +24,13 @@ public class TitleButtons extends JPanel implements ActionListener{
 		setLayout(b);
 		setOpaque(false);
 		start = new JButton(new ImageIcon("lib//StartButton.jpg"));
-		info = new JButton("info");
+		controls = new JButton("Controls");
 		start.setAlignmentX(Component.CENTER_ALIGNMENT);
-		info.setAlignmentX(Component.CENTER_ALIGNMENT);
+		controls.setAlignmentX(Component.CENTER_ALIGNMENT);
 		start.addActionListener(this);
-		info.addActionListener(this);
+		controls.addActionListener(this);
 		add(start);
-		add(info);
+		add(controls);
 		
 		myWindow = w;
 	}
@@ -45,7 +45,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 		
 		if(source == start)
 			myWindow.changePanel(3);
-		else if (source == info)
+		else if (source == controls)
 			myWindow.changePanel(2);
 	}
 

@@ -14,7 +14,7 @@ public class Window extends JFrame {
 	 */
 	JPanel cardPanel;
 	private TitlePanel title;
-	private InfoPanel info;
+	private ControlPanel info;
 	private GamePanel game;
 	private PausePanel pause;
 	//private GamePanel game;
@@ -22,7 +22,7 @@ public class Window extends JFrame {
 	public Window(){
 		super("Assemble!");
 		title = new TitlePanel(this);
-		info = new InfoPanel(this);
+		info = new ControlPanel(this);
 		game = new GamePanel();
 		pause = new PausePanel(this);
 	    addKeyListener(game.new KeyHandler());

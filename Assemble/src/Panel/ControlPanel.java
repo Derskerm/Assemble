@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-public class InfoPanel extends JPanel implements ActionListener{
+public class ControlPanel extends JPanel implements ActionListener{
 	
 	
 	private Window myWindow;
@@ -19,7 +19,7 @@ public class InfoPanel extends JPanel implements ActionListener{
 	 * 
 	 * @param w Window JFrame for changing panels
 	 */
-	public InfoPanel(Window w){
+	public ControlPanel(Window w){
 		myWindow = w;
 		BorderLayout b = new BorderLayout();
 		setLayout(b);
@@ -45,26 +45,27 @@ public class InfoPanel extends JPanel implements ActionListener{
 	 */
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    Font f = new Font();
+	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+	    g.setFont(f);
 	    g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
 	    //Up key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 20, 50, 50, null);
-	    g.drawString("Character jumps", 90, 20);
+	    g.drawString("Character jumps", 90, 50);
 	    //Down Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Down.png").getImage(), 20, 90, 50, 50, null);
-	    
+	    g.drawString("Character ducks", 90, 120);
 	    //Left Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Left.png").getImage(), 20, 160, 50, 50, null);
-	    
+	    g.drawString("Character moves left", 90, 190);
 	    //Right Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 230, 50, 50, null);
-	    
+	    g.drawString("Character moves right", 90, 260);
 	    //Shift Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Shift.png").getImage(), 20, 300, 130, 50, null);
-	    
+	    g.drawString("Character's ability activates", 170, 330);
 	    //Enter Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Enter.jpg").getImage(), 20, 370, 100, 50, null);
-	    
+	    g.drawString("Character attacks", 140, 400);
 	}
 	
 	
