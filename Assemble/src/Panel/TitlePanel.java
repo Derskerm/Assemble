@@ -1,6 +1,9 @@
 package Panel;
+
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,13 +12,13 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
 public class TitlePanel extends JPanel{
 
 	private TitleButtons buttons;
+	private Image image;
 	
 	
 	/**
@@ -29,16 +32,33 @@ public class TitlePanel extends JPanel{
 		setLayout(b);
 		add(buttons, BorderLayout.SOUTH);
 
-		
+		image = new ImageIcon("lib//TitleScreenSketch.jpg").getImage();
 	}
 	
-	/**
-	 * Paints like a regular JPanel but with the image background
-	 */
+
 	protected void paintComponent(Graphics g) {
 
 	    super.paintComponent(g);
-	        g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	    BufferedImage image2 = createResizedCopy(image, getWidth(), getHeight(), false);
+	        g.drawImage(image2, 0, 0, null);
+	        
 	}
 	
+	private BufferedImage createResizedCopy(Image originalImage, 
+    		int scaledWidth, int scaledHeight, 
+    		boolean preserveAlpha)
+    {
+    	//System.out.println("resizing...");
+    	int imageType = preserveAlpha ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+    	BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+    	Graphics2D g = scaledBI.createGraphics();
+    	if (preserveAlpha) {
+    		g.setComposite(AlphaComposite.Src);
+    	}
+    	g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null); 
+    	g.dispose();
+    	return scaledBI;
+    }	
+	
 }
+
