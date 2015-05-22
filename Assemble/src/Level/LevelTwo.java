@@ -35,6 +35,9 @@ public class LevelTwo extends Level {
 		{'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G'}
 		};
 	
+	/**
+	 * Creates a new LevelTwo
+	 */
 	public LevelTwo() {
 		super(key);
 	}

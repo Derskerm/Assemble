@@ -19,6 +19,10 @@ public abstract class Level {
 	private Player player;
 	private boolean completed;
 	
+	/**
+	 * Creates a new level
+	 * @param key the representation of the level in chars
+	 */
 	public Level(char[][] key) {
 		levelItems = new GameImage[key.length][key[0].length];
 		toGameImageArray(key);
@@ -44,14 +48,27 @@ public abstract class Level {
 		}
 	}
 	
+	/**
+	 * Returns a reference to the Player in the level
+	 * @return the Player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * Returns the GameImages in the level
+	 * @return the GameImages in the level
+	 */
 	public GameImage[][] getLevelItems() {
 		return levelItems;
 	}
 	
+	/**
+	 * Draws each GameImage in the level
+	 * @param g the Graphics of the component drawing the level
+	 * @param io the ImageObserver
+	 */
 	public void draw(Graphics g, ImageObserver io) {
 		for (GameImage[] m : levelItems) {
 			for (GameImage i : m) {
@@ -60,6 +77,9 @@ public abstract class Level {
 		}
 	}
 	
+	/**
+	 * @return true if the GoalBlock has been triggered, false otherwise
+	 */
 	public boolean hasWon() {
 		if (gb.hasWon()) {
 			completed = true;

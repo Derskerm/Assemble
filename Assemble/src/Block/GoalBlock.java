@@ -8,10 +8,18 @@ public class GoalBlock extends Block {
 	
 	private boolean hasWon = false;
 	
+	/**
+	 * Creates a new GoalBlock
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
 	public GoalBlock(int x, int y) {
 		super(false,"lib//flag_green.png",x,y);
 	}
 	
+	/**
+	 * @return true if it has been triggered, false otherwise
+	 */
 	public boolean hasWon() {
 		return hasWon;
 	}
@@ -24,6 +32,9 @@ public class GoalBlock extends Block {
 		return super.intersects(r);
 	}
 
+	/**
+	 * Resets whether
+	 */
 	public void reset() {
 		hasWon = false;
 	}

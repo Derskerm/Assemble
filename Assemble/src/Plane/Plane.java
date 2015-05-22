@@ -49,7 +49,6 @@ public class Plane {
 	/**
 	 * Adds a specified MovingImage into the Plane.
 	 * @param mi the MovingImage added to the Plane
-	 * @return the index of mi
 	 */
 	public void addGameImage(GameImage mi) {
 		images.add(mi);

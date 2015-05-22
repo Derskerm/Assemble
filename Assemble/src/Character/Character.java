@@ -24,6 +24,17 @@ public abstract class Character extends GameImage {
 	protected double jumpStrength;
 	protected boolean isRight;
 	
+	/**
+	 * Creates a new Character object
+	 * @param filename the name of the source file for the image
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param w the width of the Character
+	 * @param h the height of the Character
+	 * @param maxHealth the maximum health the Character can have
+	 * @param power the amount of damage the Character makes with an attack
+	 * @param jumpStrength the maximum height reached with a jump
+	 */
 	public Character(String filename, int x, int y, int w, int h, double maxHealth, double power, double jumpStrength) {
 		super(filename, x, y, w, h);
 		health = maxHealth;
@@ -39,19 +50,36 @@ public abstract class Character extends GameImage {
 		isRight = true;
 	}
 	
+	/**
+	 * Moves the Character upwards vertically
+	 * @pre the Character is in the plane
+	 */
 	public void jump() {
 		if (onASurface)
 			yVelocity = -jumpStrength;
 	}
 	
+	/**
+	 * Moves the Character horizontally
+	 * @pre the Character is in the plane
+	 * @param amt the distance moved
+	 */
 	public void walk(int amt) {
 		xAcc = amt;
 		if (amt != 0)
 			isRight = amt > 0;
 	}
 	
+	/**
+	 * Makes this Character attack
+	 */
 	public abstract void attack();
 	
+	/**
+	 * Adds health to the Character
+	 * @param power the amount of health points added
+	 * @return true if the character has died
+	 */
 	public boolean addHealth(double power) {
 		health += power;
 		if (health > MAX_HEALTH) {
@@ -60,14 +88,24 @@ public abstract class Character extends GameImage {
 		return health <= 0;
 	}
 	
+	/**
+	 * @return the remaining health points left
+	 */
 	public double healthLeft() {
 		return health;
 	}
 	
+	/**
+	 * @return the maximum health the character can have
+	 */
 	public double totalHealth() {
 		return MAX_HEALTH;
 	}
 	
+	/**
+	 * Makes the Character move and react to obstacles
+	 * @param obstacles the Shapes with which this Character will interact
+	 */
 	public void act(ArrayList<Shape> obstacles) {
 		double xCoord = getX();
 		double yCoord = getY();

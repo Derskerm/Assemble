@@ -27,7 +27,9 @@ public abstract class Player extends Character {
 	
 	public abstract void special();
 
-	@Override
+	/**
+	 * Attacks Characters of type Enemy within a radius of 50
+	 */
 	public void attack() {
 		Plane p = getPlane();
 		Rectangle2D r;
@@ -45,10 +47,18 @@ public abstract class Player extends Character {
 		}
 	}
 	
+	/**
+	 * Adds to the power this Character attacks with
+	 * @param power
+	 */
 	public void addPower(double power) {
 		super.power += power;
 	}
 	
+	/**
+	 * The Character uses the item
+	 * @param i the item used
+	 */
 	public void useItem(Item i) {
 		if (i instanceof Weapon) {
 			if (weapon == null) {
@@ -69,6 +79,10 @@ public abstract class Player extends Character {
 		}
 	}
 	
+	
+	/**
+	 * Any weapon that is held is discarded
+	 */
 	public void discardItem() {
 		weapon.discard();
 		weapon = null;
