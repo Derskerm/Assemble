@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class LevelLibrary {
 
 	private ArrayList<Level> levels;
-	public static final int HIGHEST_LEVEL_NUM = 2;
 	Level currentLevel;
 	
 	/**
@@ -15,7 +14,7 @@ public class LevelLibrary {
 	 */
 	public LevelLibrary(int start) {
 		levels = new ArrayList<Level>();
-		for (int i = 1; i <= HIGHEST_LEVEL_NUM; i++) {
+		for (int i = 1; i <= Level.getHighestLevelNum(); i++) {
 			levels.add(LevelLibrary.getLevel(i));
 		}
 		for (int i = 0; i < start; i++) {
@@ -29,6 +28,8 @@ public class LevelLibrary {
 			return new LevelOne();
 		} else if (num == 2) {
 			return new LevelTwo();
+		} else if (num == 3) {
+			return new SideScrollTest();
 		} else {
 			return null;
 		}
@@ -45,9 +46,11 @@ public class LevelLibrary {
 	
 	public void checkLevels() {
 		currentLevel = null;
-		for (Level l : levels) {
+		for (int i = 1; i <= Level.getHighestLevelNum(); i++) {
+			Level l = levels.get(i-1);
 			if (!l.getComplete()) {
 				currentLevel = l;
+				return;
 			}
 		}
 	}

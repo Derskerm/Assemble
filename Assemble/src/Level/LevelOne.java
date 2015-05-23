@@ -86,6 +86,6 @@ public class LevelOne extends Level {
 	 * Creates a new LevelOne
 	 */
 	public LevelOne() {
-		super(key);
+		super(key,1);
 	}
 }

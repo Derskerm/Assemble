@@ -39,7 +39,7 @@ public class LevelTwo extends Level {
 	 * Creates a new LevelTwo
 	 */
 	public LevelTwo() {
-		super(key);
+		super(key,2);
 	}
 
 }

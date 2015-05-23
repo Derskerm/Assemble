@@ -45,7 +45,7 @@ public class InfoPanel extends JPanel implements ActionListener{
 	 */
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    Font f = new Font();
+	    //Font f = new Font();
 	    g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
 	    //Up key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 20, 50, 50, null);

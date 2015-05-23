@@ -18,12 +18,17 @@ public abstract class Level {
 	private GoalBlock gb;
 	private Player player;
 	private boolean completed;
+	private int levelNum;
+	private static int HIGHEST_LEVEL_NUM = 3;
 	
 	/**
 	 * Creates a new level
 	 * @param key the representation of the level in chars
 	 */
-	public Level(char[][] key) {
+	public Level(char[][] key, int levelNum) {
+		this.levelNum = levelNum;
+		if (levelNum > HIGHEST_LEVEL_NUM)
+			HIGHEST_LEVEL_NUM = levelNum;
 		levelItems = new GameImage[key.length][key[0].length];
 		toGameImageArray(key);
 	}
@@ -37,12 +42,11 @@ public abstract class Level {
 				} else if (h == 'G') {
 					levelItems[c][r] = new GrassBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 				} else if (h == 'F') {
-					levelItems[c][r] = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
-					gb = (GoalBlock)levelItems[c][r];
+					gb = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					levelItems[c][r] = gb;
 				} else if (h == 'P') {
-					//Player p = new CatLady(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
-					Player p = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
-					player = p;
+					//player = new CatLady(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					player = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					levelItems[c][r] = player;
 				}
 			}
@@ -55,6 +59,10 @@ public abstract class Level {
 	 */
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public GoalBlock getGoalBlock() {
+		return gb;
 	}
 	
 	/**
@@ -82,10 +90,11 @@ public abstract class Level {
 	 * @return true if the GoalBlock has been triggered, false otherwise
 	 */
 	public boolean hasWon() {
-		if (gb.hasWon()) {
+		gb.intersects(player);
+		if (gb.triggered()) {
 			completed = true;
 		}
-		return gb.hasWon();
+		return gb.triggered();
 	}
 	
 	public void setCompleted(boolean complete) {
@@ -96,12 +105,19 @@ public abstract class Level {
 	}
 	
 	public boolean getComplete() {
-		if (gb.hasWon()) {
+		gb.intersects(player);
+		if (gb.triggered()) {
 			completed = true;
 		}
 		return completed;
 	}
 	
+	public int getLevelNum() {
+		return levelNum;
+	}
 	
+	public static int getHighestLevelNum() {
+		return HIGHEST_LEVEL_NUM;
+	}
 	
 }

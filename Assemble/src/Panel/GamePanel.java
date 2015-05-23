@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //level = new LevelOne();
-	  lib = new LevelLibrary(0);
+	  lib = new LevelLibrary(2);
 	  level = lib.getCurrentLevel();
 	  plane = new Plane(level);
 	  player = level.getPlayer();
@@ -115,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable
 	  	plane.act();
 	  	
 	  	if (!screenRect.intersects(player))
-	  		//spawnNewMario();
+	  		spawnNewMario();
 	  	
 	  	if (level.hasWon()) {
 	  		if (lib.getCurrentLevel() != null) {
@@ -164,8 +164,9 @@ public class KeyHandler implements KeyListener {
   public void keyReleased(KeyEvent e) {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
   		leftKey = false;
-  		if(rightKey)
-  			player.walk(1);
+  		if(rightKey) {
+	  		player.walk(1);
+  		}
   		else
   			player.walk(0);
   	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {

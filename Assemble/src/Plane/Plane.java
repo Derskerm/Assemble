@@ -118,4 +118,10 @@ public class Plane {
 			//System.out.println(mi);
 		}
 	}
+	
+	public void translate(int run, int rise) {
+		for (GameImage gi : images) {
+			gi.moveByAmount(run, rise);
+		}
+	}
 }
