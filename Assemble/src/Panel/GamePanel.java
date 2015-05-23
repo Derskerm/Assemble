@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //level = new LevelOne();
-	  lib = new LevelLibrary(2);
+	  lib = new LevelLibrary(0);
 	  level = lib.getCurrentLevel();
 	  plane = new Plane(level);
 	  player = level.getPlayer();
@@ -103,7 +103,6 @@ public class GamePanel extends JPanel implements Runnable
 
   
   public void spawnNewMario() {
-	  player.removeFromGrid();
 	  player = level.getPlayer();
 	  player.insertIntoPlane(plane);
   }
@@ -114,8 +113,13 @@ public class GamePanel extends JPanel implements Runnable
 	while (true) { // Modify this to allow quitting
 	  	plane.act();
 	  	
-	  	if (!screenRect.intersects(player))
+	  	if (player.getPlane() == null)
 	  		spawnNewMario();
+	  	
+	  	if (!screenRect.intersects(player)) {
+	  		player.removeFromGrid();
+	  		spawnNewMario();
+	  	}
 	  	
 	  	if (level.hasWon()) {
 	  		if (lib.getCurrentLevel() != null) {

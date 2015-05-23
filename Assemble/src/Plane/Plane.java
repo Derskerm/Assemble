@@ -40,8 +40,7 @@ public class Plane {
 	public ArrayList<Shape> getShapes() {
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		for (GameImage mi : images) {
-			if (!(mi instanceof Player))
-				shapes.add(mi);
+			shapes.add(mi);
 		}
 		return shapes;
 	}

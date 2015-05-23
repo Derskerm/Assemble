@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
+import Character.NPC.Spawn.Cat;
 import Item.Weapon.Weapon;
 import Plane.Plane;
 
@@ -64,7 +65,7 @@ public abstract class Character extends GameImage {
 	 * @pre the Character is in the plane
 	 * @param amt the distance moved
 	 */
-	public void walk(int amt) {
+	public void walk(double amt) {
 		xAcc = amt;
 		if (amt != 0)
 			isRight = amt > 0;
@@ -78,14 +79,15 @@ public abstract class Character extends GameImage {
 	/**
 	 * Adds health to the Character
 	 * @param power the amount of health points added
-	 * @return true if the character has died
 	 */
-	public boolean addHealth(double power) {
+	public void addHealth(double power) {
 		health += power;
 		if (health > MAX_HEALTH) {
 			health = MAX_HEALTH;
 		}
-		return health <= 0;
+		if (health <= 0) {
+			this.removeFromGrid();
+		}
 	}
 	
 	/**
@@ -126,11 +128,12 @@ public abstract class Character extends GameImage {
 		if (yVelocity > 0) {
 			Shape standingSurface = null;
 			for (Shape s : obstacles) {
-				if (s.intersects(stretchY)) {
-					onASurface = true;
-					standingSurface = s;
-					yVelocity = 0;
-				}
+				if (!s.equals(this))
+					if (s.intersects(stretchY)) {
+						onASurface = true;
+						standingSurface = s;
+						yVelocity = 0;
+					}
 			}
 			if (standingSurface != null) {
 				Rectangle r = standingSurface.getBounds();
@@ -139,10 +142,11 @@ public abstract class Character extends GameImage {
 		} else if (yVelocity < 0) {
 			Shape headSurface = null;
 			for (Shape s : obstacles) {
-				if (s.intersects(stretchY)) {
-					headSurface = s;
-					yVelocity = 0;
-				}
+				if (!s.equals(this))
+					if (s.intersects(stretchY)) {
+						headSurface = s;
+						yVelocity = 0;
+					}
 			}
 			if (headSurface != null) {
 				Rectangle r = headSurface.getBounds();
@@ -166,10 +170,11 @@ public abstract class Character extends GameImage {
 		if (xVelocity > 0) {
 			Shape rightSurface = null;
 			for (Shape s : obstacles) {
-				if (s.intersects(stretchX)) {
-					rightSurface = s;
-					xVelocity = 0;
-				}
+				if (!s.equals(this))
+					if (s.intersects(stretchX)) {
+						rightSurface = s;
+						xVelocity = 0;
+					}
 			}
 			if (rightSurface != null) {
 				Rectangle r = rightSurface.getBounds();
@@ -178,10 +183,11 @@ public abstract class Character extends GameImage {
 		} else if (xVelocity < 0) {
 			Shape leftSurface = null;
 			for (Shape s : obstacles) {
-				if (s.intersects(stretchX)) {
-					leftSurface = s;
-					xVelocity = 0;
-				}
+				if (!s.equals(this))
+					if (s.intersects(stretchX)) {
+						leftSurface = s;
+						xVelocity = 0;
+					}
 			}
 			if (leftSurface != null) {
 				Rectangle r = leftSurface.getBounds();

@@ -5,7 +5,7 @@ import Character.NPC.Spawn.Cat;
 public class CatLady extends Player {
 
 	public CatLady(int x, int y) {
-		super("lib//CatLadySimpsons.png", x, y, 29, 34, 100, 8, 13);
+		super("lib//Cat Lady standing-2.png", x, y, 29, 34, 100, 8, 13);
 		// TODO Auto-generated constructor stub
 	}
 
