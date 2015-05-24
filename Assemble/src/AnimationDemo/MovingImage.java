@@ -52,6 +52,14 @@ public class MovingImage extends Rectangle2D.Double {
 		g.drawImage(image,(int)x,(int)y,(int)width,(int)height,io);
 	}
 	
+	public void tint(Color c)  {
+		//image.
+	}
+	
+	public void revertColor() {
+		
+	}
+	
 	
 }
 
