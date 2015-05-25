@@ -10,7 +10,7 @@ import Character.Character;
 import Character.player.Player;
 import Item.Item;
 
-public abstract class Weapon extends GameImage implements Item {
+public abstract class Weapon extends Item {
 
 	private int power;
 	private boolean used;

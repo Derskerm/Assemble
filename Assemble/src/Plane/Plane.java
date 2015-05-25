@@ -39,7 +39,8 @@ public class Plane {
 	
 	public ArrayList<Shape> getShapes() {
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
-		for (GameImage mi : images) {
+		for (int i = 0; i < images.size(); i++) {
+			GameImage mi = images.get(i);
 			shapes.add(mi);
 		}
 		return shapes;
@@ -68,7 +69,8 @@ public class Plane {
 	
 	public GameImage[] getWithinRect(Rectangle s) {
 		ArrayList<GameImage> withinShape = new ArrayList<GameImage>();
-		for (GameImage mi : images) {
+		for (int i = 0; i < images.size(); i++) {
+			GameImage mi = images.get(i);
 			if (mi.intersects(s)) {
 				withinShape.add(mi);
 			}
@@ -79,8 +81,16 @@ public class Plane {
 	}
 	
 	public void act() {
-		for (GameImage gi : images) {
-			if (gi instanceof Character) {
+		for (int i = 0; i < images.size(); i++) {
+			GameImage gi = images.get(i);
+			if (gi instanceof Player) {
+				Character charact = (Character)gi;
+				charact.act(getShapes());
+			}
+		}
+		for (int i = 0; i < images.size(); i++) {
+			GameImage gi = images.get(i);
+			if (gi instanceof Character && !(gi instanceof Player)) {
 				Character charact = (Character)gi;
 				charact.act(getShapes());
 			}
@@ -103,8 +113,9 @@ public class Plane {
 	private void loadLevel(Level l) {
 		images = new ArrayList<GameImage>();
 		GameImage[][] miArr = l.getLevelItems();
-		for (GameImage[] arr : miArr) {
-			for (GameImage image : arr) {
+		for (int c = 0; c < miArr.length; c++) {
+			for (int r = 0; r < miArr[c].length; r++) {
+				GameImage image = miArr[c][r];
 				if (image != null)
 					image.insertIntoPlane(this);
 			}
@@ -112,14 +123,16 @@ public class Plane {
 	}
 	
 	public void draw(Graphics g, ImageObserver io) {
-		for (GameImage mi : images) {
+		for (int i = 0; i < images.size(); i++) {
+			GameImage mi = images.get(i);
 			mi.draw(g, io);
 			//System.out.println(mi);
 		}
 	}
 	
 	public void translate(int run, int rise) {
-		for (GameImage gi : images) {
+		for (int i = 0; i < images.size(); i++) {
+			GameImage gi = images.get(i);
 			gi.moveByAmount(run, rise);
 		}
 	}
