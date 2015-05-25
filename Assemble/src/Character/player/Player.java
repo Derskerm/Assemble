@@ -5,8 +5,12 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
+import Block.AttackBlock;
+import Block.Block;
 import Character.Character;
 import Character.NPC.Enemy.Enemy;
 import Item.Item;
