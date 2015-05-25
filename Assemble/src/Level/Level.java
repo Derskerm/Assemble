@@ -47,7 +47,8 @@ public abstract class Level {
 					gb = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					levelItems[c][r] = gb;
 				} else if (h == 'P') {
-					player = new SuperShelbz(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					player = new CatLady(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					//player = new SuperShelbz(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					//player = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					levelItems[c][r] = player;
 				} else if (h == 'S') {
