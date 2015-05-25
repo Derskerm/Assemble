@@ -17,7 +17,8 @@ public class GameImage extends MovingImage {
 	}
 	
 	public void removeFromGrid() {
-		plane.removeMovingImage(this);
+		if (plane != null)
+			plane.removeMovingImage(this);
 		plane = null;
 	}
 	

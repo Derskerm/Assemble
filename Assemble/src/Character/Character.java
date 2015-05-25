@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 import Character.NPC.Spawn.Cat;
+import Item.Item;
 import Item.Weapon.Weapon;
 import Plane.Plane;
 
@@ -82,16 +83,18 @@ public abstract class Character extends GameImage {
 	 * Adds health to the Character
 	 * @param power the amount of health points added
 	 */
-	public void addHealth(double power) {
-		health += power;
-		if (health > MAX_HEALTH) {
-			health = MAX_HEALTH;
-		}
-//		if (power < 0) {
-//			xVelocity = -1;
-//		}
-		if (health <= 0) {
-			this.removeFromGrid();
+	public void addHealth(double power, GameImage gi) {
+		if (gi != null || gi instanceof Item) {
+			health += power;
+			if (health > MAX_HEALTH) {
+				health = MAX_HEALTH;
+			}
+	//		if (power < 0) {
+	//			xVelocity = -1;
+	//		}
+			if (health <= 0) {
+				this.removeFromGrid();
+			}
 		}
 	}
 	

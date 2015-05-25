@@ -96,6 +96,12 @@ public class GamePanel extends JPanel implements Runnable
       
     plane.draw(g2, this);
     
+    g2.setColor(new Color(110,110,110));
+    g2.fillRect((int)player.x, (int)player.y+(int)player.height, (int)player.width, 5);
+    
+    g2.setColor(Color.GREEN);
+    g2.fillRect((int)player.x + 1, (int)player.y+(int)player.height+1, (int)((player.width-2)*(player.healthLeft()/player.totalHealth())), 3);
+    
     g2.setTransform(at);
 
 	// TODO Add any custom drawings here
@@ -113,11 +119,10 @@ public class GamePanel extends JPanel implements Runnable
 	while (true) { // Modify this to allow quitting
 	  	plane.act();
 	  	
-	  	if (player.getPlane() == null)
-	  		spawnNewMario();
-	  	
-	  	if (!screenRect.intersects(player)) {
+	  	if (player.getPlane() == null || !screenRect.intersects(player)) {
 	  		player.removeFromGrid();
+	  		lib = new LevelLibrary(0);
+	  		resetLevel();
 	  		spawnNewMario();
 	  	}
 	  	

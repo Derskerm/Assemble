@@ -13,6 +13,7 @@ import Character.player.CatLady;
 import Character.player.Player;
 import Character.player.PlayerOne;
 import Character.player.SuperShelbz;
+import Item.Upgrade.Heart;
 
 public abstract class Level {
 
@@ -53,6 +54,10 @@ public abstract class Level {
 					levelItems[c][r] = player;
 				} else if (h == 'S') {
 					levelItems[c][r] = new Spider(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH, false);
+				} else if (h == 'H') {
+					levelItems[c][r] = new Heart(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+				} else {
+					levelItems[c][r] = null;
 				}
 			}
 		}

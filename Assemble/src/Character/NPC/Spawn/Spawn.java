@@ -27,7 +27,7 @@ public class Spawn extends NPC {
 						&& (gi.getMaxX() - this.getMinX() < -5 || gi.getMinX() - this.getMaxX() < 5) ||
 						gi.getMinX() <= this.getMaxX() && gi.getMaxX() >= this.getMinX()
 						&& (gi.getMaxY() - this.getMinY() < -5 || gi.getMinY() - this.getMaxY() < 5))
-					((Character)gi).addHealth(-power);
+					((Character)gi).addHealth(-power, this);
 			}
 		}
 	}

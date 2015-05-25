@@ -42,7 +42,7 @@ public abstract class Player extends Character {
 		for (GameImage mi : neighbors) {
 			if (mi instanceof Enemy) {
 				Enemy e = (Enemy)mi;
-				e.addHealth(-power);
+				e.addHealth(-power,this);
 			}
 		}
 	}
@@ -64,7 +64,6 @@ public abstract class Player extends Character {
 			if (weapon == null) {
 				weapon = (Weapon)i;
 				weapon.use();
-				weapon.removeFromGrid();
 			} else {
 				weapon.discard();
 				weapon.moveToLocation(this.getMinX(), this.getMaxY() - weapon.height);
@@ -74,8 +73,9 @@ public abstract class Player extends Character {
 			}
 		} else if (i instanceof Upgrade) {
 			i.use();
-			addPower(((Upgrade) i).getPowerBonus());
-			addHealth(((Upgrade)i).getHealthBonus());
+			Upgrade m = (Upgrade)i;
+			addPower(m.getPowerBonus());
+			addHealth(m.getHealthBonus(),m);
 		}
 	}
 	
@@ -86,6 +86,31 @@ public abstract class Player extends Character {
 	public void discardItem() {
 		weapon.discard();
 		weapon = null;
+	}
+	
+	public void act(ArrayList<Shape> obstacles) {
+		double yCoord = y;
+		double xCoord = x;
+		double yCoord2 = y + yVelocity;
+		if (yCoord2 > yCoord) {
+			Rectangle2D.Double stretchY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity));
+			GameImage[] gi = getPlane().getWithinRect(stretchY.getBounds());
+			for (int i = 0; i < gi.length; i++) {
+				if (gi[i] instanceof Enemy) {
+					Enemy e = (Enemy)gi[i];
+					e.addHealth(-e.totalHealth(), this);
+				}
+			}
+		}
+		Rectangle2D.Double around = new Rectangle2D.Double(xCoord-5, yCoord-5, width+10, height+10);
+		GameImage[] gi = getPlane().getWithinRect(around.getBounds());
+		for (int i = 0; i < gi.length; i++) {
+			if (gi[i] instanceof Item) {
+				Item e = (Item)gi[i];
+				this.useItem(e);
+			}
+		}
+		super.act(obstacles);
 	}
 	
 }

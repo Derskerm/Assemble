@@ -39,8 +39,8 @@ public class TitlePanel extends JPanel{
 	protected void paintComponent(Graphics g) {
 
 	    super.paintComponent(g);
-	    BufferedImage image2 = createResizedCopy(image, getWidth(), getHeight(), false);
-	        g.drawImage(image2, 0, 0, null);
+	    //BufferedImage image2 = createResizedCopy(image, getWidth(), getHeight(), false);
+	        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 	        
 	}
 	
