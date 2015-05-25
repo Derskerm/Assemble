@@ -164,10 +164,10 @@ public class KeyHandler implements KeyListener {
   		shift = true;
   		player.special();
   	}
-  	/*else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+  	else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
   		space = true;
-  		player.attack(other);
-  	}*/
+  		player.attack();
+  	}
   }
 
   public void keyReleased(KeyEvent e) {
