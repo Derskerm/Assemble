@@ -5,6 +5,8 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 import Character.NPC.Spawn.Cat;
@@ -67,8 +69,8 @@ public abstract class Character extends GameImage {
 	 */
 	public void walk(double amt) {
 		xAcc = amt;
-		if (amt != 0)
-			isRight = amt > 0;
+//		if (amt != 0)
+//			isRight = amt > 0;
 	}
 	
 	/**
@@ -85,9 +87,9 @@ public abstract class Character extends GameImage {
 		if (health > MAX_HEALTH) {
 			health = MAX_HEALTH;
 		}
-		if (power < 0) {
-			xVelocity = -1;
-		}
+//		if (power < 0) {
+//			xVelocity = -1;
+//		}
 		if (health <= 0) {
 			this.removeFromGrid();
 		}

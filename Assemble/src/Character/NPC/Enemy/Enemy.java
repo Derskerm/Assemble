@@ -18,15 +18,15 @@ public abstract class Enemy extends NPC {
 
 	public void attack() {
 		Rectangle2D.Double rekt;
-		if (right) {
-			rekt = new Rectangle2D.Double(this.getMaxX(),this.getMinY(),25,25);
-		} else {
-			rekt = new Rectangle2D.Double(this.getMinX()-25,this.getMinY(),25,25);
-		}
+		rekt = new Rectangle2D.Double(this.getCenterX()-width,this.getCenterY()-height,width*2, height*2);
 		GameImage[] images = getPlane().getWithinRect(rekt.getBounds());
 		for (GameImage gi : images) {
 			if (gi instanceof Player || gi instanceof Spawn) {
-				((Character)gi).addHealth(-power);
+				if (gi.getMinY() <= this.getMaxY() && gi.getMaxY() >= this.getMinY()
+						&& (gi.getMaxX() - this.getMinX() < -5 || gi.getMinX() - this.getMaxX() < 5) ||
+						gi.getMinX() <= this.getMaxX() && gi.getMaxX() >= this.getMinX()
+						&& (gi.getMaxY() - this.getMinY() < -5 || gi.getMinY() - this.getMaxY() < 5))
+					((Character)gi).addHealth(-power);
 			}
 		}
 	}
