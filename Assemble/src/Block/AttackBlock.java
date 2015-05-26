@@ -25,6 +25,10 @@ public class AttackBlock extends Block implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		t.stop();
 		removeFromGrid();
+		boolean cats = true;
+		if (cats) {
+			cats = false;
+		}
 	}
 
 }

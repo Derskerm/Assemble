@@ -113,8 +113,6 @@ public class Plane {
 	}
 	
 	public void removeMovingImage(MovingImage mi) {
-		if (mi instanceof Block)
-			return;
 		for (int i = 0; i < images.size(); i++) {
 			if (images.get(i).equals(mi)) {
 				images.remove(i);
@@ -138,7 +136,7 @@ public class Plane {
 			}
 		}
 		height = miArr.length * 25;
-		width = miArr.length * 25;
+		width = miArr[0].length * 25;
 		x = 0;
 		y = 0;
 	}
@@ -152,6 +150,8 @@ public class Plane {
 	}
 	
 	public void translate(int run, int rise) {
+		x += run;
+		y += rise;
 		for (int i = 0; i < images.size(); i++) {
 			GameImage gi = images.get(i);
 			gi.moveByAmount(run, rise);

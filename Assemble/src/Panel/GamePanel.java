@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //level = new LevelOne();
-	  lib = new LevelLibrary(0);
+	  lib = new LevelLibrary(2);
 	  level = lib.getCurrentLevel();
 	  plane = new Plane(level);
 	  player = level.getPlayer();
@@ -95,11 +95,21 @@ public class GamePanel extends JPanel implements Runnable
     g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
     
     if (player.getMaxX() >= screenRect.getMaxX() - 100) {
-    	int diff = (int)(player.getMaxX() - screenRect.getMaxX() + 100);
-    	plane.translate(-diff, 0);
-    } else if (player.getMinX() < screenRect.getMinX() + 25) {
-    	int diff = (int)(screenRect.getMinX() + 25 - player.getMinX());
-    	plane.translate(diff, 0);
+    	int diff = (int)(player.getMaxX() - (screenRect.getMaxX() - 100));
+    	if (plane.getX() + plane.getWidth() - diff >= screenRect.getMaxX()) {
+        	plane.translate(-diff, 0);
+    	} else {
+        	int diff2 = plane.getX();
+    		plane.translate(-diff2, 0);
+    	}
+    } else if (player.getMinX() < screenRect.getMinX() + 100) {
+    	int diff = (int)(screenRect.getMinX() + 100 - player.getMinX());
+    	if (plane.getX() + diff <= screenRect.getMinX()) {
+        	plane.translate(diff, 0);
+    	} else {
+        	int diff2 = -plane.getX();
+    		plane.translate(diff2, 0);
+    	}
     }
 
     plane.draw(g2, this);
@@ -129,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable
 	  	plane.act();
 	  	
 	  	if (player.getPlane() == null || !screenRect.intersects(player)) {
-	  		lib = new LevelLibrary(0);
+	  		lib = new LevelLibrary(2);
 	  		level = lib.getCurrentLevel();
 			plane = new Plane(level);
 			player = level.getPlayer();
@@ -137,9 +147,9 @@ public class GamePanel extends JPanel implements Runnable
 	  	
 	  	if (level.hasWon()) {
 	  		if (lib.getCurrentLevel() != null) {
-		  		JOptionPane.showMessageDialog(null, "Victory!");
+		  		//JOptionPane.showMessageDialog(null, "Victory!");
 	  		} else {
-		  		JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
+		  		//JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
 		  		lib = new LevelLibrary(0);
 	  		}
 			level = lib.getCurrentLevel();
