@@ -24,7 +24,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 		setLayout(b);
 		setOpaque(false);
 		start = new JButton(new ImageIcon("lib//StartButton.jpg"));
-		controls = new JButton("Controls");
+		controls = new JButton(new ImageIcon("lib//ControlsButton.png"));
 		start.setAlignmentX(Component.CENTER_ALIGNMENT);
 		controls.setAlignmentX(Component.CENTER_ALIGNMENT);
 		start.addActionListener(this);
