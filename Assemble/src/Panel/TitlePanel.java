@@ -32,7 +32,7 @@ public class TitlePanel extends JPanel{
 		setLayout(b);
 		add(buttons, BorderLayout.SOUTH);
 
-		image = new ImageIcon("lib//TitleScreenSketch.jpg").getImage();
+		image = new ImageIcon("lib//TitleBackground.png").getImage();
 	}
 	
 
