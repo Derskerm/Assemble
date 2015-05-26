@@ -8,7 +8,7 @@ public class PlayerOne extends Player {
 	private Sword s;
 	
 	public PlayerOne(int x, int y) {
-		super("lib//character.png", x, y, 25, 50, 100, 10, 15);
+		super(null, x, y, 25, 50, 100, 25, 15);
 		s = new Sword(0, 0);
 		weapon = s;
 		// TODO Auto-generated constructor stub

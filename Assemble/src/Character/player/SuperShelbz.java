@@ -15,14 +15,10 @@ import Plane.Plane;
 public class SuperShelbz extends Player {
 
 	boolean doubleJumped;
-	boolean injured = false;
-	boolean attacking = false;
-	int count = 100;
-	int attackCount = 20;
 	
 	
 	public SuperShelbz(int x, int y) {
-		super("lib//Super Shelbz-2.png", x, y, 35, 50, 100, 10, 13);
+		super(new String[]{"lib//Super Shelbz-2.png", "lib//SS run right.gif", "lib//SS run left.gif", "lib//SS attack right.png", "lib//SS attack left.png", "lib//SS injured right.gif", "lib//SS injured left.gif"}, x, y, 35, 50, 100, 10, 13);
 		doubleJumped = true;
 	}
 
@@ -36,42 +32,13 @@ public class SuperShelbz extends Player {
 		}
 	}
 	
-	public void addHealth(double power, GameImage gi) {
-		if (gi.getPlane() != null || gi instanceof Item) {
-			if (!injured) {
-				if (power < 0) {
-					injured = true;
-					if (isRight) {
-						xVelocity = -1;
-					} else {
-						xVelocity = 1;
-					}
-					xAcc = 0;
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (gi.getPlane() != null || gi instanceof Item) {
-						super.addHealth(power,gi);
-				} else {
-					super.setImage(new ImageIcon("lib//Super Shelbz-2.png").getImage());
-					injured = false;
-					count = 0;
-				}
-			}
-		}
-	}
-	
 	public void attack() {
 		attacking = true;
 		boolean enemies = false;
 		if (isRight)
-			super.setImage(new ImageIcon("lib//SS attack right.png").getImage());
+			super.setImage(images[3]);
 		else
-			super.setImage(new ImageIcon("lib//SS attack left.png").getImage());
+			super.setImage(images[4]);
 		Plane p = getPlane();
 		Rectangle2D r;
 		if (isRight) {
@@ -95,7 +62,7 @@ public class SuperShelbz extends Player {
 		}
 	}
 	
-	public void act(ArrayList<Shape> obstacles) {
+	/*public void act(ArrayList<Shape> obstacles) {
 		double xCoord = x;
 		double yCoord = y;
 		
@@ -155,6 +122,6 @@ public class SuperShelbz extends Player {
 		
 		if (onASurface)
 			doubleJumped = false;
-	}
+	}*/
 
 }
