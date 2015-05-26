@@ -23,7 +23,7 @@ public abstract class Enemy extends NPC {
 		for (int i = 0; i < images.length; i++) {
 			GameImage gi = images[i];
 			if (gi instanceof Player || gi instanceof Spawn) {
-				if (gi.getMinY() <= this.getMaxY() && gi.getMaxY() >= this.getMinY()
+				if (gi.getPlane() != null && gi.getMinY() <= this.getMaxY() && gi.getMaxY() >= this.getMinY()
 						&& (gi.getMaxX() - this.getMinX() <= -1 || gi.getMinX() - this.getMaxX() <= 1) ||
 						gi.getMinX() <= this.getMaxX() && gi.getMaxX() >= this.getMinX()
 						&& (gi.getMaxY() - this.getMinY() <= -1 ))//|| gi.getMinY() - this.getMaxY() <= 1))
