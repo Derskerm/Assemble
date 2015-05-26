@@ -29,8 +29,8 @@ public class SideScrollTest extends Level {
 		{'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G'},
 		};
 	
-	public SideScrollTest() {
-		super(key, 3);
+	public SideScrollTest(int charNum) {
+		super(key, 3, charNum);
 		// TODO Auto-generated constructor stub
 	}
 

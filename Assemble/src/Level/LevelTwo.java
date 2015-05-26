@@ -38,8 +38,8 @@ public class LevelTwo extends Level {
 	/**
 	 * Creates a new LevelTwo
 	 */
-	public LevelTwo() {
-		super(key,2);
+	public LevelTwo(int charNum) {
+		super(key,2, charNum);
 	}
 
 }

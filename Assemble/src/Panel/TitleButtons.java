@@ -44,7 +44,7 @@ public class TitleButtons extends JPanel implements ActionListener{
 		Object source = e.getSource();
 		
 		if(source == start)
-			myWindow.changePanel(3);
+			myWindow.changePanel(5);
 		else if (source == controls)
 			myWindow.changePanel(2);
 	}

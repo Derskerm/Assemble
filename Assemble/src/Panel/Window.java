@@ -17,6 +17,7 @@ public class Window extends JFrame {
 	private ControlPanel info;
 	private GamePanel game;
 	private PausePanel pause;
+	private SelectPanel select;
 	//private GamePanel game;
 	
 	public Window(){
@@ -25,6 +26,8 @@ public class Window extends JFrame {
 		info = new ControlPanel(this);
 		game = new GamePanel();
 		pause = new PausePanel(this);
+		select = new SelectPanel(this);
+		
 	    addKeyListener(game.new KeyHandler());
 		//setResizable(false);
 		//game = new GamePanel(this);
@@ -42,6 +45,7 @@ public class Window extends JFrame {
 	    cardPanel.add(info,"2");
 	    cardPanel.add(game, "3");
 	    cardPanel.add(pause, "4");
+	    cardPanel.add(select, "5");
 	    
 	    add(cardPanel);
 	
@@ -68,13 +72,18 @@ public class Window extends JFrame {
 		else if(panelNum == 3){
 			((CardLayout)cardPanel.getLayout()).show(cardPanel,"3");
 			requestFocus();
+			game.setCharacter(select.getCharacterNum());
 			new Thread(game).start();
 			
 		}
 		else if(panelNum == 4){
 			((CardLayout)cardPanel.getLayout()).show(cardPanel,"4");
 			requestFocus();
-			new Thread(game).start();
+			
+		}
+		else if(panelNum == 5){
+			((CardLayout)cardPanel.getLayout()).show(cardPanel,"5");
+			requestFocus();
 			
 		}
 			
