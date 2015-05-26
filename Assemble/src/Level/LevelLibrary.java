@@ -12,10 +12,10 @@ public class LevelLibrary {
 	 * @param start the highest level not completed, or zero if no levels have been completed.
 	 * @pre 0 <= start <= HIGHEST_LEVEL_NUM
 	 */
-	public LevelLibrary(int start) {
+	public LevelLibrary(int start, int charNum) {
 		levels = new ArrayList<Level>();
 		for (int i = 1; i <= Level.getHighestLevelNum(); i++) {
-			levels.add(LevelLibrary.getLevel(i));
+			levels.add(LevelLibrary.getLevel(i, charNum));
 		}
 		for (int i = 0; i < start; i++) {
 			levels.get(i).setCompleted(true);
@@ -23,13 +23,13 @@ public class LevelLibrary {
 		currentLevel = levels.get(start);
 	}
 	
-	public static Level getLevel(int num) {
+	public static Level getLevel(int num, int charNum) {
 		if (num == 1) {
-			return new LevelOne();
+			return new LevelOne(charNum);
 		} else if (num == 2) {
-			return new LevelTwo();
+			return new LevelTwo(charNum);
 		} else if (num == 3) {
-			return new SideScrollTest();
+			return new SideScrollTest(charNum);
 		} else {
 			return null;
 		}

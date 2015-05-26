@@ -21,7 +21,7 @@ public abstract class Level {
 	private GoalBlock gb;
 	private Player player;
 	private boolean completed;
-	private int levelNum;
+	private int levelNum, charNum;
 	private static int HIGHEST_LEVEL_NUM = 3;
 	private char[][] key;
 	
@@ -29,7 +29,8 @@ public abstract class Level {
 	 * Creates a new level
 	 * @param key the representation of the level in chars
 	 */
-	public Level(char[][] key, int levelNum) {
+	public Level(char[][] key, int levelNum, int charNum) {
+		this.charNum = charNum;
 		this.key = key;
 		this.levelNum = levelNum;
 		if (levelNum > HIGHEST_LEVEL_NUM)
@@ -50,8 +51,11 @@ public abstract class Level {
 					gb = new GoalBlock(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					levelItems[c][r] = gb;
 				} else if (h == 'P') {
-					player = new CatLady(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
-//					player = new SuperShelbz(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					if (charNum == 0) {
+						player = new CatLady(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					} else if (charNum == 1) {
+						player = new SuperShelbz(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
+					}
 					//player = new PlayerOne(r*Block.BLOCK_SIDE_LENGTH, c*Block.BLOCK_SIDE_LENGTH);
 					levelItems[c][r] = player;
 				} else if (h == 'S') {

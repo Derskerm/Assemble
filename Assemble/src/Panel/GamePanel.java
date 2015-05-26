@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable
   private Plane plane;
   private Player player;
   private Level level;
+  private int charNum;
 
 
   public GamePanel () {
@@ -54,7 +55,8 @@ public class GamePanel extends JPanel implements Runnable
 //		  }
 //	  }
 	  //level = new LevelOne();
-	  lib = new LevelLibrary(2);
+	  charNum = 0;
+	  lib = new LevelLibrary(2,charNum);
 	  level = lib.getCurrentLevel();
 	  plane = new Plane(level);
 	  player = level.getPlayer();
@@ -131,6 +133,18 @@ public class GamePanel extends JPanel implements Runnable
 	  player.moveToLocation(playerStartX, playerStartY);
 	  player.insertIntoPlane(plane);
   }
+  
+  public void setCharacter(int charNum) {
+	  this.charNum = charNum;
+	  lib = new LevelLibrary(0, charNum);
+	  double h = player.getHealth();
+	  level = lib.getCurrentLevel();
+	  plane = new Plane(level);
+	  player = level.getPlayer();
+	  player.setHealth(h);
+	  playerStartX = (int)player.getX();
+      playerStartY = (int)player.getY();
+  }
 
   
 
@@ -139,7 +153,7 @@ public class GamePanel extends JPanel implements Runnable
 	  	plane.act();
 	  	
 	  	if (player.getPlane() == null || !screenRect.intersects(player)) {
-	  		lib = new LevelLibrary(2);
+	  		lib = new LevelLibrary(2,charNum);
 	  		level = lib.getCurrentLevel();
 			plane = new Plane(level);
 			player = level.getPlayer();
@@ -150,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable
 		  		//JOptionPane.showMessageDialog(null, "Victory!");
 	  		} else {
 		  		//JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
-		  		lib = new LevelLibrary(0);
+		  		lib = new LevelLibrary(0, charNum);
 	  		}
 	  		double h = player.getHealth();
 			level = lib.getCurrentLevel();
