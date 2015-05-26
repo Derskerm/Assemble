@@ -23,20 +23,22 @@ public abstract class Level {
 	private boolean completed;
 	private int levelNum;
 	private static int HIGHEST_LEVEL_NUM = 3;
+	private char[][] key;
 	
 	/**
 	 * Creates a new level
 	 * @param key the representation of the level in chars
 	 */
 	public Level(char[][] key, int levelNum) {
+		this.key = key;
 		this.levelNum = levelNum;
 		if (levelNum > HIGHEST_LEVEL_NUM)
 			HIGHEST_LEVEL_NUM = levelNum;
 		levelItems = new GameImage[key.length][key[0].length];
-		toGameImageArray(key);
+		toGameImageArray();
 	}
 	
-	private void toGameImageArray(char[][] key) {
+	private void toGameImageArray() {
 		for (int c = 0; c < key.length; c++) {
 			for (int r = 0; r < key[c].length; r++) {
 				char h = key[c][r];
@@ -128,6 +130,11 @@ public abstract class Level {
 	
 	public static int getHighestLevelNum() {
 		return HIGHEST_LEVEL_NUM;
+	}
+	
+	public void reset() {
+		levelItems = new GameImage[key.length][key[0].length];
+		toGameImageArray();
 	}
 	
 }

@@ -18,7 +18,7 @@ public class SuperShelbz extends Player {
 	boolean injured = false;
 	boolean attacking = false;
 	int count = 100;
-	int attackCount = 25;
+	int attackCount = 20;
 	
 	
 	public SuperShelbz(int x, int y) {
@@ -149,7 +149,7 @@ public class SuperShelbz extends Player {
 			attackCount--;
 			if (attackCount <= 0) {
 				attacking = false;
-				attackCount = 50;
+				attackCount = 20;
 			}
 		}
 		

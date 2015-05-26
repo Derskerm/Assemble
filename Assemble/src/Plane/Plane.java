@@ -10,6 +10,9 @@ import java.util.List;
 
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
+import Block.Block;
+import Character.NPC.Spawn.Cat;
+import Character.NPC.Spawn.Spawn;
 import Character.player.Player;
 import Level.Level;
 import Character.Character;
@@ -18,6 +21,7 @@ public class Plane {
 	
 	private ArrayList<GameImage> images;
 	private int width, height;
+	private int x, y;
 	
 	public Plane(int width, int height) {
 		images = new ArrayList<GameImage>();
@@ -35,6 +39,10 @@ public class Plane {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	public int getX() {
+		return x;
 	}
 	
 	public ArrayList<Shape> getShapes() {
@@ -81,7 +89,7 @@ public class Plane {
 	}
 	
 	public void act() {
-		for (int i = 0; i < images.size(); i++) {
+		/*for (int i = 0; i < images.size(); i++) {
 			GameImage gi = images.get(i);
 			if (gi instanceof Player) {
 				Character charact = (Character)gi;
@@ -90,7 +98,14 @@ public class Plane {
 		}
 		for (int i = 0; i < images.size(); i++) {
 			GameImage gi = images.get(i);
-			if (gi instanceof Character && !(gi instanceof Player)) {
+			if (gi instanceof Spawn && !(gi instanceof Player)) {
+				Character charact = (Character)gi;
+				charact.act(getShapes());
+			}
+		}*/
+		for (int i = 0; i < images.size(); i++) {
+			GameImage gi = images.get(i);
+			if (gi instanceof Character) { // && !(gi instanceof Player) && !(gi instanceof Spawn)) {
 				Character charact = (Character)gi;
 				charact.act(getShapes());
 			}
@@ -98,6 +113,8 @@ public class Plane {
 	}
 	
 	public void removeMovingImage(MovingImage mi) {
+		if (mi instanceof Block)
+			return;
 		for (int i = 0; i < images.size(); i++) {
 			if (images.get(i).equals(mi)) {
 				images.remove(i);
@@ -120,6 +137,10 @@ public class Plane {
 					image.insertIntoPlane(this);
 			}
 		}
+		height = miArr.length * 25;
+		width = miArr.length * 25;
+		x = 0;
+		y = 0;
 	}
 	
 	public void draw(Graphics g, ImageObserver io) {

@@ -87,13 +87,21 @@ public class GamePanel extends JPanel implements Runnable
    
   //Background image
   	BufferedImage img = null;
-      try {
-          img = ImageIO.read(new File("lib//assemble_background.png"));
-      } catch (IOException e) {
-      	e.printStackTrace();
-      }
-      g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
-      
+    try {
+        img = ImageIO.read(new File("lib//assemble_background.png"));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    g2.drawImage(img, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT, this);
+    
+    if (player.getMaxX() >= screenRect.getMaxX() - 100) {
+    	int diff = (int)(player.getMaxX() - screenRect.getMaxX() + 100);
+    	plane.translate(-diff, 0);
+    } else if (player.getMinX() < screenRect.getMinX() + 25) {
+    	int diff = (int)(screenRect.getMinX() + 25 - player.getMinX());
+    	plane.translate(diff, 0);
+    }
+
     plane.draw(g2, this);
     
     g2.setColor(new Color(110,110,110));
@@ -110,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable
   
   public void spawnNewMario() {
 	  player = level.getPlayer();
+	  player.moveToLocation(playerStartX, playerStartY);
 	  player.insertIntoPlane(plane);
   }
 
@@ -120,10 +129,10 @@ public class GamePanel extends JPanel implements Runnable
 	  	plane.act();
 	  	
 	  	if (player.getPlane() == null || !screenRect.intersects(player)) {
-	  		player.removeFromGrid();
 	  		lib = new LevelLibrary(0);
-	  		resetLevel();
-	  		spawnNewMario();
+	  		level = lib.getCurrentLevel();
+			plane = new Plane(level);
+			player = level.getPlayer();
 	  	}
 	  	
 	  	if (level.hasWon()) {
@@ -131,10 +140,13 @@ public class GamePanel extends JPanel implements Runnable
 		  		JOptionPane.showMessageDialog(null, "Victory!");
 	  		} else {
 		  		JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
-		  		lib.reset();
+		  		lib = new LevelLibrary(0);
 	  		}
-  			resetLevel();
-  			spawnNewMario();
+			level = lib.getCurrentLevel();
+			plane = new Plane(level);
+			player = level.getPlayer();
+			playerStartX = (int)player.getX();
+			playerStartY = (int)player.getY();
 	  	}
 	  	
 	  	repaint();
@@ -144,12 +156,18 @@ public class GamePanel extends JPanel implements Runnable
 	  	} catch (InterruptedException e) {}
 	}
   }
-  
-  private boolean upKey;
 
 public class KeyHandler implements KeyListener {
-  private boolean rightKey, leftKey, space, shift;//, upKey;
+  private boolean upKey, rightKey, leftKey, space, shift;//, upKey;
 	
+  public void reset() {
+	  upKey = false;
+	  rightKey = false;
+	  leftKey = false;
+	  space = false;
+	  shift = false;
+  }
+  
   public void keyPressed(KeyEvent e) {
   	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
   		leftKey = true;

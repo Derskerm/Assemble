@@ -56,6 +56,12 @@ public class LevelLibrary {
 	}
 	
 	public void reset() {
+		for (Level l : levels) {
+			l.reset();
+		}
+	}
+	
+	public void restart() {
 		for (Level l : levels) 
 			l.setCompleted(false);
 		currentLevel = levels.get(0);

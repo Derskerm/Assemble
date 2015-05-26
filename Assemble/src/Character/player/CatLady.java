@@ -10,7 +10,7 @@ import Character.NPC.Spawn.Cat;
 public class CatLady extends Player {
 
 	public CatLady(int x, int y) {
-		super("lib//Cat Lady standing-2.png", x, y, 29, 34, 100, 8, 13);
+		super("lib//Cat Lady standing-2.png", x, y, 35, 50, 100, 8, 13);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -45,15 +45,15 @@ public class CatLady extends Player {
 		
 
 		if (isRight)
-			if (still)
-				super.setImage(new ImageIcon("lib//Cat Lady standing-2.png").getImage());
-			else
+			if (still) {
+				//super.setImage(new ImageIcon("lib//Cat Lady standing-2.png").getImage());
+			} else
 				super.setImage(new ImageIcon("lib//CL fly right.gif").getImage());
 		
 		if (!isRight)
-			if (still)
-				super.setImage(new ImageIcon("lib//Cat Lady standing left.png").getImage());
-			else
+			if (still) {
+				//super.setImage(new ImageIcon("lib//Cat Lady standing left.png").getImage());
+			} else
 				super.setImage(new ImageIcon("lib//CL fly left.gif").getImage());
 		
 	}
