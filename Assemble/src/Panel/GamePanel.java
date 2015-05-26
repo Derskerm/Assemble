@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable
     g2.fillRect((int)player.x, (int)player.y+(int)player.height, (int)player.width, 5);
     
     g2.setColor(Color.GREEN);
-    g2.fillRect((int)player.x + 1, (int)player.y+(int)player.height+1, (int)((player.width-2)*(player.healthLeft()/player.totalHealth())), 3);
+    g2.fillRect((int)player.x + 1, (int)player.y+(int)player.height+1, (int)((player.width-2)*(player.getHealth()/player.totalHealth())), 3);
     
     g2.setTransform(at);
 
@@ -152,9 +152,11 @@ public class GamePanel extends JPanel implements Runnable
 		  		//JOptionPane.showMessageDialog(null, "You have won the game!!!!!!");
 		  		lib = new LevelLibrary(0);
 	  		}
+	  		double h = player.getHealth();
 			level = lib.getCurrentLevel();
 			plane = new Plane(level);
 			player = level.getPlayer();
+			player.setHealth(h);
 			playerStartX = (int)player.getX();
 			playerStartY = (int)player.getY();
 	  	}

@@ -62,6 +62,12 @@ public class SuperShelbz extends Player {
 		}
 	}
 	
+	public void act(ArrayList<Shape> obstacles) {
+		super.act(obstacles);
+		if (onASurface)
+			doubleJumped = false;
+	}
+	
 	/*public void act(ArrayList<Shape> obstacles) {
 		double xCoord = x;
 		double yCoord = y;

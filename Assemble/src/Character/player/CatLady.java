@@ -18,7 +18,7 @@ public class CatLady extends Player {
 
 	public CatLady(int x, int y) {
 		super(new String[]{"lib//Cat Lady standing-2.png","lib//CL fly right.gif","lib//CL fly left.gif","lib//CL fly right.gif","lib//CL fly left.gif","lib//CL fly right.gif","lib//CL fly left.gif"}, x, y, 35, 50, 100, 8, 13);
-		// TODO Auto-generated constructor stub
+		gravity = 1;
 	}
 	
 	public void attack() {

@@ -21,7 +21,9 @@ public class CatBlock extends Cat {
 	}
 	
 	public void addHealth(double power, GameImage gi) {
-		
+		if (gi instanceof NyanCat) {
+			super.addHealth(power, gi);
+		}
 	}
 
 }
