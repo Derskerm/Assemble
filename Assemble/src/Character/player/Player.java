@@ -1,5 +1,6 @@
 package Character.player;
 
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
@@ -20,21 +21,81 @@ import Plane.Plane;
 
 public abstract class Player extends Character {
 	
+	protected boolean injured = false;
+	protected boolean attacking = false;
+	protected int count = 100;
+	protected int attackCount = 20;
 	protected Weapon weapon;
+	protected Image[] images;
 
-	public Player(String filename, int x, int y, int w, int h,
+	/**
+	 * 
+	 * @param filenames in the order still, run right, run left, attack right, attack left, injured left, injured right, attackblock
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param maxHealth
+	 * @param power
+	 * @param jumpStrength
+	 */
+	public Player(String[] filenames, int x, int y, int w, int h,
 			double maxHealth, double power, double jumpStrength) {
-		super(filename, x, y, w, h, maxHealth, power, jumpStrength);
+		super(filenames[0], x, y, w, h, maxHealth, power, jumpStrength);
+		
 		weapon = null;
+		images = new Image[7];
+		images[0] = new ImageIcon(filenames[0]).getImage();
+		images[1] = new ImageIcon(filenames[1]).getImage();
+		images[2] = new ImageIcon(filenames[2]).getImage();
+		images[3] = new ImageIcon(filenames[3]).getImage();
+		images[4] = new ImageIcon(filenames[4]).getImage();
+		images[5] = new ImageIcon(filenames[5]).getImage();
+		images[6] = new ImageIcon(filenames[6]).getImage();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public abstract void special();
 
+	public void addHealth(double power, GameImage gi) {
+		if (gi.getPlane() != null || gi instanceof Item) {
+			if (!injured) {
+				if (power < 0) {
+					injured = true;
+					if (isRight) {
+						xVelocity = -1;
+					} else {
+						xVelocity = 1;
+					}
+					xAcc = 0;
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (gi.getPlane() != null || gi instanceof Item) {
+						super.addHealth(power,gi);
+				} else {
+					super.setImage(images[0]);
+					injured = false;
+					count = 0;
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Attacks Characters of type Enemy within a radius of 50
 	 */
 	public void attack() {
+		attacking = true;
+		boolean enemies = false;
+		if (isRight)
+			super.setImage(images[3]);
+		else
+			super.setImage(images[4]);
 		Plane p = getPlane();
 		Rectangle2D r;
 		if (isRight) {
@@ -47,6 +108,7 @@ public abstract class Player extends Character {
 			if (mi instanceof Enemy) {
 				Enemy e = (Enemy)mi;
 				e.addHealth(-power,this);
+				enemies = true;
 			}
 		}
 	}
@@ -93,11 +155,11 @@ public abstract class Player extends Character {
 	}
 	
 	public void act(ArrayList<Shape> obstacles) {
-		double yCoord = y;
 		double xCoord = x;
-		double yCoord2 = y + yVelocity;
-		if (yCoord2 > yCoord) {
-			Rectangle2D.Double stretchY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity));
+		double yCoord = y;
+		double yCoordAfter = y + yVelocity;
+		if (yCoordAfter > yCoord) {
+			Rectangle2D.Double stretchY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoordAfter),width,height+Math.abs(yVelocity));
 			GameImage[] gi = getPlane().getWithinRect(stretchY.getBounds());
 			for (int i = 0; i < gi.length; i++) {
 				if (gi[i] instanceof Enemy) {
@@ -115,117 +177,6 @@ public abstract class Player extends Character {
 			}
 		}
 		super.act(obstacles);
-	}
-	
-}
-
-/*
-package Character.player;
-
-import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-
-import AnimationDemo.GameImage;
-import Block.AttackBlock;
-import Character.NPC.Enemy.Enemy;
-import Item.Item;
-import Plane.Plane;
-
-public class SuperShelbz extends Player {
-
-	boolean doubleJumped;
-	boolean injured = false;
-	boolean attacking = false;
-	int count = 100;
-	int attackCount = 20;
-	
-	
-	public SuperShelbz(int x, int y) {
-		super("lib//Super Shelbz-2.png", x, y, 35, 50, 100, 10, 13);
-		doubleJumped = true;
-	}
-
-	/**
-	 * Hacks into the system to allow for double jumping.
-	 *
-	public void special() {
-		if (!doubleJumped) {
-			yVelocity =- jumpStrength;
-			doubleJumped = true;
-		}
-	}
-	
-	public void addHealth(double power, GameImage gi) {
-		if (gi.getPlane() != null || gi instanceof Item) {
-			if (!injured) {
-				if (power < 0) {
-					injured = true;
-					if (isRight) {
-						xVelocity = -1;
-					} else {
-						xVelocity = 1;
-					}
-					xAcc = 0;
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (gi.getPlane() != null || gi instanceof Item) {
-						super.addHealth(power,gi);
-				} else {
-					super.setImage(new ImageIcon("lib//Super Shelbz-2.png").getImage());
-					injured = false;
-					count = 0;
-				}
-			}
-		}
-	}
-	
-	public void attack() {
-		attacking = true;
-		boolean enemies = false;
-		if (isRight)
-			super.setImage(new ImageIcon("lib//SS attack right.png").getImage());
-		else
-			super.setImage(new ImageIcon("lib//SS attack left.png").getImage());
-		Plane p = getPlane();
-		Rectangle2D r;
-		if (isRight) {
-			r = new Rectangle2D.Double(this.getMaxX(), this.getMinY(), 50, 50);
-		} else {
-			r = new Rectangle2D.Double(this.getMinX() - 50, this.getMinY(), 50, 50);
-		}
-		GameImage[] neighbors = p.getWithinRect(r.getBounds());
-		for (GameImage mi : neighbors) {
-			if (mi instanceof Enemy) {
-				Enemy e = (Enemy)mi;
-				e.addHealth(-power,this);
-				enemies = true;
-				AttackBlock b = new AttackBlock("lib//glitch.gif", (int)e.getX(), (int)e.getY());
-				b.insertIntoPlane(getPlane());
-			}
-		}
-		if (!enemies) {
-			AttackBlock b = new AttackBlock("lib//glitch.gif", (int)r.getX() + 12, (int)r.getY() + 12);
-			b.insertIntoPlane(getPlane());
-		}
-	}
-	
-	public void act(ArrayList<Shape> obstacles) {
-		double xCoord = x;
-		double yCoord = y;
-		
-		//y += 8;
-		//width = 19;
-		super.act(obstacles);
-		//y -= 8;
-		//width = 35;
 		
 		double xCoord2 = x;
 		double yCoord2 = y;
@@ -243,23 +194,23 @@ public class SuperShelbz extends Player {
 			if (still) {
 				if (attacking) {
 					if (isRight)
-						super.setImage(new ImageIcon("lib//SS attack right.png").getImage());
+						super.setImage(images[3]);
 					else
-						super.setImage(new ImageIcon("lib//SS attack left.png").getImage());
+						super.setImage(images[4]);
 				} else {
-					super.setImage(new ImageIcon("lib//Super Shelbz-2.png").getImage());
+					super.setImage(images[0]);
 				}
 			} else {
 				if (isRight)
-						super.setImage(new ImageIcon("lib//SS run right.gif").getImage());
+						super.setImage(images[1]);
 				if (!isRight)
-						super.setImage(new ImageIcon("lib//SS run left.gif").getImage());
+						super.setImage(images[2]);
 			}
 		} else {
 			if (isRight) {
-				super.setImage(new ImageIcon("lib//SS injured right.gif").getImage());
+				super.setImage(images[5]);
 			} else {
-				super.setImage(new ImageIcon("lib//SS injured left.gif").getImage());
+				super.setImage(images[6]);
 			}
 			count--;
 			if (count <= 0) {
@@ -275,9 +226,6 @@ public class SuperShelbz extends Player {
 			}
 		}
 		
-		if (onASurface)
-			doubleJumped = false;
 	}
-
+	
 }
-*/

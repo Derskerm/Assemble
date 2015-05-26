@@ -18,7 +18,7 @@ import Plane.Plane;
 
 public class Spawn extends NPC implements ActionListener {
 	
-	private Timer t = new Timer(1000, this);
+	protected Timer t = new Timer(1000, this);
 	
 	public Spawn(String filename, int x, int y, int w, int h, double maxHealth,
 			double power, boolean right) {

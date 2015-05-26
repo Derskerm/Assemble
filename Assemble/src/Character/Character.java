@@ -41,7 +41,7 @@ public abstract class Character extends GameImage {
 	 */
 	public Character(String filename, int x, int y, int w, int h, double maxHealth, double power, double jumpStrength) {
 		super(filename, x, y, w, h);
-		health = maxHealth;
+		setHealth(maxHealth);
 		MAX_HEALTH = maxHealth;
 		this.power = power;
 		xVelocity = 0;
@@ -85,24 +85,17 @@ public abstract class Character extends GameImage {
 	 */
 	public void addHealth(double power, GameImage gi) {
 		if (gi != null || gi instanceof Item) {
-			health += power;
-			if (health > MAX_HEALTH) {
-				health = MAX_HEALTH;
+			setHealth(getHealth() + power);
+			if (getHealth() > MAX_HEALTH) {
+				setHealth(MAX_HEALTH);
 			}
 	//		if (power < 0) {
 	//			xVelocity = -1;
 	//		}
-			if (health <= 0) {
+			if (getHealth() <= 0) {
 				this.removeFromGrid();
 			}
 		}
-	}
-	
-	/**
-	 * @return the remaining health points left
-	 */
-	public double healthLeft() {
-		return health;
 	}
 	
 	/**
@@ -208,6 +201,14 @@ public abstract class Character extends GameImage {
 			xVelocity = 0;
 		
 		moveToLocation(xCoord2,yCoord2);
+	}
+
+	public double getHealth() {
+		return health;
+	}
+
+	public void setHealth(double health) {
+		this.health = health;
 	}
 	
 	

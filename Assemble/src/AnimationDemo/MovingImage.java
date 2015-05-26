@@ -56,7 +56,9 @@ public class MovingImage extends Rectangle2D.Double {
 		image = i;
 	}
 	
-	
+	public Image getImage() {
+		return image;
+	}
 }
 
 

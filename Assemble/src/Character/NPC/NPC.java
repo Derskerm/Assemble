@@ -9,19 +9,17 @@ import Character.Character;
 import Character.NPC.Enemy.Enemy;
 
 public abstract class NPC extends Character {
-
-	protected boolean right;
 	
 	public NPC(String filename, int x, int y, int w, int h, double maxHealth,
 			double power, double jumpStrength, boolean right) {
 		super(filename, x, y, w, h, maxHealth, power, jumpStrength);
-		this.right = right;
+		isRight = right;
 	}
 
 	public abstract void attack();
 
 	public void act(ArrayList<Shape> obstacles) {
-		if (right)
+		if (isRight)
 			this.walk(1);
 		else
 			this.walk(-1);
@@ -29,7 +27,7 @@ public abstract class NPC extends Character {
 		double xCoord = x;
 		super.act(obstacles);
 		if (xCoord == x) {
-			right = !right;
+			isRight = !isRight;
 		}
 	}
 	
