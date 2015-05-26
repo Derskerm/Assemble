@@ -16,7 +16,6 @@ public class SuperShelbz extends Player {
 
 	boolean doubleJumped;
 	
-	
 	public SuperShelbz(int x, int y) {
 		super(new String[]{"lib//Super Shelbz-2.png", "lib//SS run right.gif", "lib//SS run left.gif", "lib//SS attack right.png", "lib//SS attack left.png", "lib//SS injured right.gif", "lib//SS injured left.gif"}, x, y, 35, 50, 100, 10, 13);
 		doubleJumped = true;
@@ -67,67 +66,4 @@ public class SuperShelbz extends Player {
 		if (onASurface)
 			doubleJumped = false;
 	}
-	
-	/*public void act(ArrayList<Shape> obstacles) {
-		double xCoord = x;
-		double yCoord = y;
-		
-		//y += 8;
-		//width = 19;
-		super.act(obstacles);
-		//y -= 8;
-		//width = 35;
-		
-		double xCoord2 = x;
-		double yCoord2 = y;
-		
-		boolean still = xCoord == xCoord2;
-		
-		if (!injured) {
-			if (xCoord2 > xCoord && !isRight) {
-				isRight = true;
-			}
-			if (xCoord2 < xCoord && isRight) {
-				isRight = false;
-			}
-			
-			if (still) {
-				if (attacking) {
-					if (isRight)
-						super.setImage(new ImageIcon("lib//SS attack right.png").getImage());
-					else
-						super.setImage(new ImageIcon("lib//SS attack left.png").getImage());
-				} else {
-					super.setImage(new ImageIcon("lib//Super Shelbz-2.png").getImage());
-				}
-			} else {
-				if (isRight)
-						super.setImage(new ImageIcon("lib//SS run right.gif").getImage());
-				if (!isRight)
-						super.setImage(new ImageIcon("lib//SS run left.gif").getImage());
-			}
-		} else {
-			if (isRight) {
-				super.setImage(new ImageIcon("lib//SS injured right.gif").getImage());
-			} else {
-				super.setImage(new ImageIcon("lib//SS injured left.gif").getImage());
-			}
-			count--;
-			if (count <= 0) {
-				injured = false;
-				count = 50;
-			}
-		}
-		if (attacking) {
-			attackCount--;
-			if (attackCount <= 0) {
-				attacking = false;
-				attackCount = 20;
-			}
-		}
-		
-		if (onASurface)
-			doubleJumped = false;
-	}*/
-
 }

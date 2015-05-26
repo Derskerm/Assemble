@@ -66,7 +66,5 @@ public class CatLady extends Player {
 				super.setImage(new ImageIcon("lib//CL fly left.gif").getImage());
 			}
 		}
-		
 	}
-
 }

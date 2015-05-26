@@ -1,17 +1,5 @@
 package Level;
-/*
-import java.awt.Graphics2D;
-import java.awt.image.ImageObserver;
-import java.util.ArrayList;
-import Character.AbstractCharacter;
-import Character.Enemy.AbstractEnemy;
-import OtherObjects.Platform;
 
-public class LevelOne {
-=======
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
-*/
 import Character.player.Player;
 import AnimationDemo.MovingImage;
 import Block.Block;
@@ -53,35 +41,6 @@ public class LevelOne extends Level {
 	{'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G',  'G','G','G','G'}
 	};
 	
-/*	//Fields
-	private ArrayList<Platform> platforms;
-	private ArrayList<AbstractCharacter> allies;
-	private ArrayList<AbstractEnemy> enemies;
-	
-	public LevelOne() {
-		platforms = new ArrayList<Platform>();
-		addPlatforms();
-		allies = new ArrayList<AbstractCharacter>();
-		enemies = new ArrayList<AbstractEnemy>();
-	}
-	
-	private void addPlatforms() {
-		platforms.add(new Platform(100, 400, 65, 30));
-		platforms.add(new Platform(195, 200, 110, 30));
-		platforms.add(new Platform(550, 250, 80, 30));
-		platforms.add(new Platform(375, 350, 80, 30));
-	}
-	
-	private void addAllies() {
-		//allies.add(new AbstractCharacter());
-	}
-	
-	public void draw(Graphics2D g, ImageObserver io) {
-		for(Platform p : platforms) {
-			p.draw(g, io);
-		}
-	}
-=======*/
 	/**
 	 * Creates a new LevelOne
 	 */

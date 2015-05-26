@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
 public class SelectPanel extends JPanel implements ActionListener{
 	
 	
@@ -70,7 +69,4 @@ public class SelectPanel extends JPanel implements ActionListener{
 	    g.setFont(f);
 	    g.drawString("Choose a character!", 160, 280);
 	}
-	
-	
-
 }
