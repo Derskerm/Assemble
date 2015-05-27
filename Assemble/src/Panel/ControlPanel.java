@@ -46,25 +46,32 @@ public class ControlPanel extends JPanel implements ActionListener{
 	 */
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+	    int buttonD = (int)(getHeight() * .12);
+	    int imageX = (int)(getWidth() * .05);
+	    int imageYU = (int)(getHeight() * .05);
+	    int imageSpacing = buttonD + (int)(getHeight() * .05);
+	    int sX = (int)(getWidth() * .15);
+	    int sY = (int)(getHeight() * .11);
+	    //int sSpacing = buttonD + (int)
+	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, (int)(getHeight() * .05));
 	    g.setFont(f);
 	    g.setColor(Color.WHITE);
 	    g.drawImage(new ImageIcon("lib//Background.png").getImage(), 0, 0, null);
 	    //Up key
-	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 20, 50, 50, null);
-	    g.drawString("Character jumps", (int)(getWidth() * .1), (int)(getHeight() * .1));
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), imageX, imageYU, buttonD, buttonD, null);
+	    g.drawString("Character jumps", sX, sY);
 	    //Left Key
-	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Left.png").getImage(), 20, 160, 50, 50, null);
-	    g.drawString("Character moves left", 90, 190);
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Left.png").getImage(), imageX, imageYU + imageSpacing, buttonD, buttonD, null);
+	    g.drawString("Character moves left", sX, sY + imageSpacing);
 	    //Right Key
-	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 230, 50, 50, null);
-	    g.drawString("Character moves right", 90, 260);
+	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), imageX, imageYU + imageSpacing * 2, buttonD, buttonD, null);
+	    g.drawString("Character moves right", sX, sY + imageSpacing * 2);
 	    //Shift Key
-	    g.drawImage(new ImageIcon("lib//computer_key_Shift.png").getImage(), 20, 300, 130, 50, null);
-	    g.drawString("Character's ability activates", 170, 330);
+	    g.drawImage(new ImageIcon("lib//computer_key_Shift.png").getImage(), imageX, imageYU + imageSpacing * 3, (int)(getWidth() * .18), buttonD, null);
+	    g.drawString("Character's ability activates", (int)(getWidth() * .25), sY + imageSpacing * 3);
 	    //Enter Key
-	    g.drawImage(new ImageIcon("lib//computer_key_Enter.jpg").getImage(), 20, 370, 100, 50, null);
-	    g.drawString("Character attacks", 140, 400);
+	    g.drawImage(new ImageIcon("lib//computer_key_Enter.jpg").getImage(), imageX, imageYU + imageSpacing * 4, (int)(getWidth() * .15), buttonD, null);
+	    g.drawString("Character attacks", (int)(getWidth() * .21), sY + imageSpacing * 4);
 	}
 	
 	
