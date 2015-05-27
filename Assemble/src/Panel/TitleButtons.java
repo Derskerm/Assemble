@@ -1,4 +1,5 @@
 package Panel;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,8 +24,14 @@ public class TitleButtons extends JPanel implements ActionListener{
 		BoxLayout b = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		setLayout(b);
 		setOpaque(false);
-		start = new JButton(new ImageIcon("lib//StartButton.jpg"));
+		start = new JButton(new ImageIcon("lib//StartButton.png"));
+		start.setBackground(Color.BLACK);
+		start.setBorder(null);
+		start.setOpaque(false);
 		controls = new JButton(new ImageIcon("lib//ControlsButton.png"));
+		controls.setBackground(Color.BLACK);
+		controls.setBorder(null);
+		controls.setOpaque(false);
 		start.setAlignmentX(Component.CENTER_ALIGNMENT);
 		controls.setAlignmentX(Component.CENTER_ALIGNMENT);
 		start.addActionListener(this);

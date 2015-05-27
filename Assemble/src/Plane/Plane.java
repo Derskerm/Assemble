@@ -154,6 +154,9 @@ public class Plane {
 		y += rise;
 		for (int i = 0; i < images.size(); i++) {
 			GameImage gi = images.get(i);
+			if (gi.getX() > 670 && (gi instanceof Player)) {
+				System.out.println(gi.x);
+			}
 			gi.moveByAmount(run, rise);
 		}
 	}

@@ -28,12 +28,19 @@ public class SelectPanel extends JPanel implements ActionListener{
 		setLayout(b);
 		JPanel panel = new JPanel();
 		image = new ImageIcon("lib//Background.png").getImage();
-		button = new JButton("CatLady");
-		button2 = new JButton("SuperShelbz");
+		button = new JButton(new ImageIcon("lib//Cat Lady standing-2.png"));
+		button.setBackground(Color.BLACK);
+		//button.setBorder(null);
+		button.setOpaque(false);
+		button2 = new JButton(new ImageIcon("lib//Super Shelbz-2.png"));
+		button2.setBackground(Color.BLACK);
+		//button2.setBorder(null);
+		button2.setOpaque(false);
 		button.addActionListener(this);
 		button2.addActionListener(this);
 		panel.add(button);
 		panel.add(button2);
+		panel.setOpaque(false);
 		add(panel, BorderLayout.SOUTH);
 	}
 

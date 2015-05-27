@@ -151,8 +151,11 @@ public class GamePanel extends JPanel implements Runnable
   public void run() {
 	while (true) { // Modify this to allow quitting
 	  	plane.act();
-	  	
+
 	  	if (player.getPlane() == null || !screenRect.intersects(player)) {
+	  		System.out.println(player.getPlane());
+	  		System.out.println(screenRect.intersects(player));
+	  		System.out.println(player.x + "," + player.y);
 	  		lib = new LevelLibrary(2,charNum);
 	  		level = lib.getCurrentLevel();
 			plane = new Plane(level);

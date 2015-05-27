@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import AnimationDemo.GameImage;
 import AnimationDemo.MovingImage;
 import Character.NPC.Spawn.Cat;
+import Character.NPC.Spawn.NyanCat;
+import Character.player.Player;
 import Item.Item;
 import Item.Weapon.Weapon;
 import Plane.Plane;
@@ -115,7 +117,8 @@ public abstract class Character extends GameImage {
 		double width = getWidth();
 		double height = getHeight();
 		
-		
+		if (yVelocity < 0)
+			System.out.println(yVelocity + "," + y);
 
 		// ***********Y AXIS***********
 
