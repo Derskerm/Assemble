@@ -18,6 +18,7 @@ public class SelectPanel extends JPanel implements ActionListener{
 	private JButton button, button2;
 	private int charNum;
 	private Image image;
+	
 	/**
 	 * 
 	 * @param w Window JFrame for changing panels

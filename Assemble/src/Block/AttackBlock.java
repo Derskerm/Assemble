@@ -11,6 +11,12 @@ public class AttackBlock extends Block implements ActionListener {
 
 	private Timer t = new Timer(100,this);
 	
+	/**
+	 * 
+	 * @param filename Name of file for AttackBlock
+	 * @param x X-Coordinate of AttackBlock
+	 * @param y Y-Coordinate of AttackBlock
+	 */
 	public AttackBlock(String filename, int x, int y) {
 		super(false, filename, x, y);
 		// TODO Auto-generated constructor stub
