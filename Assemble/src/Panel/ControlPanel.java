@@ -1,5 +1,6 @@
 package Panel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -47,13 +48,11 @@ public class ControlPanel extends JPanel implements ActionListener{
 	    super.paintComponent(g);
 	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, 20);
 	    g.setFont(f);
-	    g.drawImage(new ImageIcon("lib//TitleScreenSketch.jpg").getImage(), 0, 0, null);
+	    g.setColor(Color.WHITE);
+	    g.drawImage(new ImageIcon("lib//Background.png").getImage(), 0, 0, null);
 	    //Up key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Up.png").getImage(), 20, 20, 50, 50, null);
-	    g.drawString("Character jumps", 90, 50);
-	    //Down Key
-	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Down.png").getImage(), 20, 90, 50, 50, null);
-	    g.drawString("Character ducks", 90, 120);
+	    g.drawString("Character jumps", (int)(getWidth() * .1), (int)(getHeight() * .1));
 	    //Left Key
 	    g.drawImage(new ImageIcon("lib//computer_key_Arrow_Left.png").getImage(), 20, 160, 50, 50, null);
 	    g.drawString("Character moves left", 90, 190);
