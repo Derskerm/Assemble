@@ -70,10 +70,13 @@ public class SelectPanel extends JPanel implements ActionListener{
 	 */
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
+	    int sX = (int)(getWidth() * .2);
+	    int sY = (int)(getHeight() * .5);
+	    int fSize = (int)(getHeight() * .1);
 	    g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, 50);
+	    Font f = new Font(Font.SANS_SERIF, Font.BOLD, fSize);
 	    g.setColor(Color.WHITE);
 	    g.setFont(f);
-	    g.drawString("Choose a character!", 160, 280);
+	    g.drawString("Choose a character!", sX, sY);
 	}
 }
